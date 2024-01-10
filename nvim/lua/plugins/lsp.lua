@@ -31,7 +31,6 @@ local on_attach = function(_, bufnr)
   end, "[w]orkspace [l]ist folders")
 end
 
-
 local function config()
   local servers = {
     clangd = { capabilities = { offsetEncoding = { "utf-16" } } },
@@ -44,11 +43,11 @@ local function config()
             library = {
               [vim.fn.expand("$VIMRUNTIME/lua")] = true,
               [vim.fn.stdpath("config") .. "/lua"] = true,
-            }
+            },
           },
-          telemetry = { enable = false }
+          telemetry = { enable = false },
         },
-      }
+      },
     },
 
     html = {},
@@ -151,7 +150,6 @@ local function config()
           return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
         end,
       },
-      { name = "nvim_lsp_signature_help" },
       { name = "copilot" },
       { name = "luasnip" },
       {
@@ -159,7 +157,7 @@ local function config()
         option = {
           trailing_slash = true,
           get_cwd = vim.loop.cwd,
-        }
+        },
       },
     }, {
       { name = "buffer" },
@@ -182,7 +180,6 @@ local function config()
   })
 end
 
-
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -194,7 +191,6 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
 
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
@@ -208,11 +204,9 @@ return {
           { "williamboman/mason.nvim", config = true },
           "williamboman/mason-lspconfig.nvim",
 
-          { "j-hui/fidget.nvim",       opts = {} },
-
           "folke/neodev.nvim",
         },
       },
-    }
+    },
   },
 }

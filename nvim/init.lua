@@ -15,7 +15,19 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  install = { colorscheme = { "rose-pine" } },
+  checker = {
+    enabled = true,
+    concurrency = 1,
+    notify = true,
+    frequency = 60 * 60 * 24, -- every 2 days
+  },
+  change_detection = {
+    enable = true,
+    notify = false,
+  },
+})
 
 require("config.core")
 require("config.options")

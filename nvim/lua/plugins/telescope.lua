@@ -38,7 +38,6 @@ local function apply_keymaps()
   map("<leader>fb", function()
     telescope.extensions.file_browser.file_browser({
       hidden = true,
-      depth = false,
     })
   end, "[f]ile [b]rowser")
 
@@ -74,6 +73,7 @@ local function open_file_browser_autocmd()
         vim.cmd.enew()
         require("telescope").extensions.file_browser.file_browser({
           path = ctx.file,
+          cwd_to_path = true,
           hidden = true,
           depth = false,
         })
@@ -113,6 +113,7 @@ local function config()
     },
     extensions = {
       file_browser = {
+        git_status = false,
         hijack_netrw = true,
       },
       ["ui-select"] = {
@@ -132,7 +133,7 @@ local function config()
 
   apply_style()
   apply_keymaps()
-  open_file_browser_autocmd()
+  -- open_file_browser_autocmd()
 end
 
 

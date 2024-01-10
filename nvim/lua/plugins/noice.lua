@@ -8,6 +8,13 @@ return {
         ["vim.lsp.util.stylize_markdown"] = true,
         ["cmp.entry.get_documentation"] = true,
       },
+      signature = {
+        opts = {
+          position = {
+            col = 60 -- is equal to cmp maxwidth to prevent overlap with signature
+          },
+        }
+      },
     },
     presets = {
       bottom_search = false,
@@ -20,7 +27,5 @@ return {
 
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "rcarriga/nvim-notify",
-  }
+  },
 }
-

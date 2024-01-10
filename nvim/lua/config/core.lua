@@ -24,14 +24,14 @@ end
 map("n", "<C-s>", save, "save file")
 
 -- Close buffer and go to the previous one
-map("n", "<C-q>", ":bdelete!<CR>:bprev<CR>", "forcefully close buffer")
+map("n", "<C-q>", ":bdelete!<CR>:bprev<CR>", "forcefully [q]uit buffer")
 
 -- Mappings for cycling buffers
 map("n", "<C-h>", ":bprev<CR>", "previous buffer")
 map("n", "<C-l>", ":bnext<CR>", "next buffer")
 
 -- Remove search highlights
-map("n", "<leader>h", ":nohlsearch<CR>", "remove search highlights")
+map("n", "<leader>h", ":nohlsearch<CR>", "remove search [h]ighlights")
 
 -- Change indent and keep visual mode
 map("v", "<", "<gv", "reduce indent")
@@ -42,20 +42,20 @@ map("v", "J", ":m '>+1<CR>gv=gv", "move selection down")
 map("v", "K", ":m '<-2<CR>gv=gv", "move selection up")
 
 -- Move half pages and recenter
-map("n", "<C-d>", "zz<C-d>", "half page down")
-map("n", "<C-u>", "zz<C-u>", "half page up")
+map("n", "<C-d>", "zz<C-d>", "half page [d]own")
+map("n", "<C-u>", "zz<C-u>", "half page [u]p")
 
 -- Paste in visual mode and keep original clipboard
 map("v", "p", '"_dP', "paste over selection")
 
 -- Mappings for surround replacement
-map("v", "S(", "<ESC>`>a)<ESC>`<i(<ESC>gv", "surround selection with parenthesis")
-map("v", "S[", "<ESC>`>a]<ESC>`<i[<ESC>gv", "surround selection with brackets")
-map("v", "S{", "<ESC>`>a}<ESC>`<i{<ESC>gv", "surround selection with braces")
-map("v", "S'", "<ESC>`>a'<ESC>`<i'<ESC>gv", "surround selection with single quotes")
-map("v", 'S"', '<ESC>`>a"<ESC>`<i"<ESC>gv', "surround selection with double quotes")
-map("v", "S`", "<ESC>`>a`<ESC>`<i`<ESC>gv", "surround selection with backticks")
-map("v", "S<", "<ESC>`>a<<ESC>`<i<<ESC>gv", "surround selection with angle brackets")
+map("v", "S(", "<ESC>`>a)<ESC>`<i(<ESC>gv", "[s]urround selection with ()")
+map("v", "S[", "<ESC>`>a]<ESC>`<i[<ESC>gv", "[s]urround selection with []]")
+map("v", "S{", "<ESC>`>a}<ESC>`<i{<ESC>gv", "[s]urround selection with {}}")
+map("v", "S'", "<ESC>`>a'<ESC>`<i'<ESC>gv", "[s]urround selection with ''")
+map("v", 'S"', '<ESC>`>a"<ESC>`<i"<ESC>gv', "[s]urround selection with \"\"")
+map("v", "S`", "<ESC>`>a`<ESC>`<i`<ESC>gv", "[s]urround selection with ``")
+map("v", "S<", "<ESC>`>a<<ESC>`<i<<ESC>gv", "[s]urround selection with <>")
 
 -- Remap to ease navigating wrapped lines
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
