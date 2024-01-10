@@ -31,6 +31,19 @@ local on_attach = function(_, bufnr)
   end, "[w]orkspace [l]ist folders")
 end
 
+local function apply_diagnostic_icons()
+  local set_diagnostic_sign = function(type, icon)
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+
+  local icons = require("config.icons")
+  set_diagnostic_sign("Error", icons.error)
+  set_diagnostic_sign("Warn", icons.warn)
+  set_diagnostic_sign("Info", icons.info)
+  set_diagnostic_sign("Hint", icons.hint)
+end
+
 local function config()
   local servers = {
     clangd = { capabilities = { offsetEncoding = { "utf-16" } } },
@@ -84,8 +97,6 @@ local function config()
   local luasnip = require("luasnip")
   require("luasnip.loaders.from_vscode").lazy_load()
   luasnip.config.setup({})
-
-  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
   cmp.setup({
     snippet = {
@@ -178,6 +189,9 @@ local function config()
       { name = "buffer" },
     },
   })
+
+  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+  apply_diagnostic_icons()
 end
 
 return {

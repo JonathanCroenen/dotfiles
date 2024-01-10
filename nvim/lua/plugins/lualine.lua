@@ -20,7 +20,6 @@ local diagnostics = {
     hint = icons.hint,
   },
   colored = true,
-  always_visible = true,
 }
 
 local diff = {
