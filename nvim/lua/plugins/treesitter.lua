@@ -1,5 +1,7 @@
 local function config()
   require("nvim-treesitter.configs").setup({
+    modules = {},
+    ignore_install = {},
     ensure_installed = {
       "c",
       "cpp",

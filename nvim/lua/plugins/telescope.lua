@@ -66,6 +66,22 @@ local function apply_style()
   vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = bg, bg = bg })
 end
 
+local function open_file_browser_autocmd()
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
+    group = vim.api.nvim_create_augroup("telescope filebrowser open", {}),
+    callback = function(ctx)
+      if vim.fn.isdirectory(ctx.file) then
+        vim.cmd.enew()
+        require("telescope").extensions.file_browser.file_browser({
+          path = ctx.file,
+          hidden = true,
+          depth = false,
+        })
+      end
+    end
+  })
+end
+
 local function config()
   local actions = require("telescope.actions")
   local telescope = require("telescope")
@@ -116,6 +132,7 @@ local function config()
 
   apply_style()
   apply_keymaps()
+  open_file_browser_autocmd()
 end
 
 
