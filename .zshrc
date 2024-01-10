@@ -36,7 +36,7 @@ alias vim=nvim
 
 export MANPATH="/usr/local/man:$MANPATH"
 export PATH=$PATH:/home/jonathan/.local/bin:/home/jonathan/Dev/Bin:/usr/local/jdk1.8.0/bin
-export PATH=$PATH:/usr/local/cuda-12.3/bin:/home/jonathan/.ghcup/bin:/home/jonathan/Dev/Include
+export PATH=$PATH:/usr/local/cuda-12.3/bin:/home/jonathan/.ghcup/bin:/home/jonathan/.cargo/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/:/home/jonathan/Dev/Lib/
 
 export CONDA_AUTO_ACTIVATE_BASE=false

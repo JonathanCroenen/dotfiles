@@ -9,7 +9,7 @@ config.audible_bell = "Disabled"
 config.check_for_updates = false
 
 -- [[ Appearance ]]
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("JetBrains Mono Nerd Font Mono")
 config.font_size = 12.0
 
 config.color_scheme = "rose-pine"
