@@ -10,6 +10,8 @@ config.check_for_updates = false
 
 -- [[ Appearance ]]
 config.font = wezterm.font("JetBrains Mono")
+config.font_size = 12.0
+
 config.color_scheme = "rose-pine"
 
 config.hide_tab_bar_if_only_one_tab = true
@@ -17,7 +19,7 @@ config.use_fancy_tab_bar = false
 config.tab_max_width = 20
 
 config.inactive_pane_hsb = {
-  saturation = 0.8,
+  saturation = 0.7,
   brightness = 0.9,
 }
 
@@ -65,9 +67,14 @@ config.keys = {
   { key = "(", mods = "CTRL|SHIFT", action = action.ActivateTab(8) },
   { key = ")", mods = "CTRL|SHIFT", action = action.ActivateTab(-1) },
 
-  -- [[ Miscelaneous ]]
-  { key = "6", mods = "ALT", action = action.SendKey({ key = "Home" }) },
+  -- [[ Motions ]]
+  { key = "0", mods = "ALT", action = action.SendKey({ key = "Home" }) },
   { key = "4", mods = "ALT", action = action.SendKey({ key = "End" }) },
+  { key = "h", mods = "ALT", action = action.SendKey({ key = "LeftArrow" }) },
+  { key = "l", mods = "ALT", action = action.SendKey({ key = "RightArrow" }) },
+
+  -- [[ Miscelaneous ]]
+  { key = "F11", mods = "", action = action.ToggleFullScreen },
 }
 
 return config

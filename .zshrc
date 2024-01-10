@@ -28,19 +28,18 @@ ZSH_AUTOSUGGEST_STRATEGY=(completion history)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export MANPATH="/usr/local/man:$MANPATH"
-
 export LANG=en_US.UTF-8
 
 alias DGPU="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
+alias ls=colorls
+alias vim=nvim
 
+export MANPATH="/usr/local/man:$MANPATH"
 export PATH=$PATH:/home/jonathan/.local/bin:/home/jonathan/Dev/Bin:/usr/local/jdk1.8.0/bin
 export PATH=$PATH:/usr/local/cuda-12.3/bin:/home/jonathan/.ghcup/bin:/home/jonathan/Dev/Include
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/:/home/jonathan/Dev/Lib/
 
 export CONDA_AUTO_ACTIVATE_BASE=false
-
-alias ls=colorls
 
 # Conda
 __conda_setup="$('/home/jonathan/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
