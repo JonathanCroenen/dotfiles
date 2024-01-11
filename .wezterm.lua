@@ -10,7 +10,10 @@ config.check_for_updates = false
 
 -- [[ Appearance ]]
 config.font = wezterm.font("JetBrains Mono Nerd Font Mono")
-config.font_size = 12.0
+config.font_size = 11.5
+
+config.initial_cols = 135
+config.initial_rows = 32
 
 config.color_scheme = "rose-pine"
 
