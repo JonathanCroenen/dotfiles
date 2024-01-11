@@ -9,21 +9,23 @@ end
 local function apply_keymaps()
   local telescope = require("telescope")
   local builtin = require("telescope.builtin")
-  local themes = require("telescope.themes")
 
   map("<leader>fr", builtin.oldfiles, "[f]ind [r]ecent files")
   map("<leader>b", builtin.buffers, "[f]ind [b]uffers")
   map("<leader>/", function()
-    builtin.current_buffer_fuzzy_find(themes.get_dropdown({
-      winblend = 10,
+    builtin.current_buffer_fuzzy_find({
       previewer = false,
-    }))
+      layout_config = {
+        width = 0.5,
+        height = 0.5,
+      },
+    })
   end, "find in current file")
 
   map("<leader>f/", function()
     builtin.live_grep({
       grep_open_files = true,
-      prompt_title = "Grep in Open Files"
+      prompt_title = "Grep in Open Files",
     })
   end, "[f]ind in open files")
 
@@ -37,6 +39,8 @@ local function apply_keymaps()
 
   map("<leader>fb", function()
     telescope.extensions.file_browser.file_browser({
+      path = vim.fn.expand("%:p:h"),
+      cwd_to_path = true,
       hidden = true,
     })
   end, "[f]ile [b]rowser")
@@ -65,23 +69,6 @@ local function apply_style()
   vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = bg, bg = bg })
 end
 
-local function open_file_browser_autocmd()
-  vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
-    group = vim.api.nvim_create_augroup("telescope filebrowser open", {}),
-    callback = function(ctx)
-      if vim.fn.isdirectory(ctx.file) then
-        vim.cmd.enew()
-        require("telescope").extensions.file_browser.file_browser({
-          path = ctx.file,
-          cwd_to_path = true,
-          hidden = true,
-          depth = false,
-        })
-      end
-    end
-  })
-end
-
 local function config()
   local actions = require("telescope.actions")
   local telescope = require("telescope")
@@ -108,8 +95,8 @@ local function config()
           ["<C-k>"] = actions.move_selection_previous,
           ["<C-n>"] = false,
           ["<C-p>"] = false,
-        }
-      }
+        },
+      },
     },
     extensions = {
       file_browser = {
@@ -120,8 +107,8 @@ local function config()
         layout_config = {
           width = 0.4,
           height = 0.4,
-        }
-      }
+        },
+      },
     },
   })
 
@@ -133,13 +120,11 @@ local function config()
 
   apply_style()
   apply_keymaps()
-  -- open_file_browser_autocmd()
 end
-
 
 return {
   "nvim-telescope/telescope.nvim",
-  event = "VeryLazy",
+  lazy = false, -- So that telescope file browser can open on startup
   config = config,
 
   dependencies = {
@@ -152,6 +137,6 @@ return {
       end,
     },
     "nvim-telescope/telescope-file-browser.nvim",
-    "nvim-telescope/telescope-ui-select.nvim"
-  }
+    "nvim-telescope/telescope-ui-select.nvim",
+  },
 }

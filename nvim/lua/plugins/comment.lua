@@ -1,5 +1,12 @@
 local function config()
-  require("Comment").setup()
+  require("Comment").setup({
+    padding = true,
+    sticky = true,
+    mappings = {
+      basic = false,
+      extra = false,
+    },
+  })
 
   vim.keymap.set("n", "<C-/>", function()
     require("Comment.api").toggle.linewise.current()

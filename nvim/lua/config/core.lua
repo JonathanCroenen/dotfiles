@@ -1,4 +1,3 @@
-
 -- [[ Basic Keymappings ]]
 local function map(mode, keys, func, desc)
   vim.keymap.set(mode, keys, func, { desc = desc, silent = true })
@@ -46,14 +45,14 @@ map("n", "<C-d>", "zz<C-d>", "half page [d]own")
 map("n", "<C-u>", "zz<C-u>", "half page [u]p")
 
 -- Paste in visual mode and keep original clipboard
-map("v", "p", '"_dP', "paste over selection")
+map("v", "p", "\"_dP", "paste over selection")
 
 -- Mappings for surround replacement
 map("v", "S(", "<ESC>`>a)<ESC>`<i(<ESC>gv", "[s]urround selection with ()")
 map("v", "S[", "<ESC>`>a]<ESC>`<i[<ESC>gv", "[s]urround selection with []]")
 map("v", "S{", "<ESC>`>a}<ESC>`<i{<ESC>gv", "[s]urround selection with {}}")
 map("v", "S'", "<ESC>`>a'<ESC>`<i'<ESC>gv", "[s]urround selection with ''")
-map("v", 'S"', '<ESC>`>a"<ESC>`<i"<ESC>gv', "[s]urround selection with \"\"")
+map("v", "S\"", "<ESC>`>a\"<ESC>`<i\"<ESC>gv", "[s]urround selection with \"\"")
 map("v", "S`", "<ESC>`>a`<ESC>`<i`<ESC>gv", "[s]urround selection with ``")
 map("v", "S<", "<ESC>`>a<<ESC>`<i<<ESC>gv", "[s]urround selection with <>")
 
@@ -61,12 +60,19 @@ map("v", "S<", "<ESC>`>a<<ESC>`<i<<ESC>gv", "[s]urround selection with <>")
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-
--- [[ Highlight on Yank ]]
+-- [[ Nice Auto Commands ]]
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-    callback = function()
-        vim.highlight.on_yank({ higroup = "Visual", timeout = 300 })
-    end
+  callback = function()
+    vim.highlight.on_yank({ higroup = "Visual", timeout = 300 })
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "qf", "help", "man", "lspinfo", "checkhealth", "notify" },
+  callback = function()
+    vim.keymap.set("n", "q", ":close<CR>", { silent = true, buffer = true })
+    vim.o.buflisted = false
+  end,
 })
 
 -- [[ Disable Netrw ]]
