@@ -11,7 +11,7 @@ return {
       signature = {
         opts = {
           position = {
-            col = 60 -- is equal to cmp maxwidth to prevent overlap with signature
+            col = 50 -- is equal to cmp maxwidth to prevent overlap with completion menu
           },
         }
       },
@@ -23,6 +23,15 @@ return {
       inc_rename = false,
       lsp_doc_border = false,
     },
+  },
+  format = {
+    level = {
+      icons = {
+        error = require("config.icons").error,
+        warn = require("config.icons").warn,
+        info = require("config.icons").info,
+      }
+    }
   },
 
   dependencies = {
