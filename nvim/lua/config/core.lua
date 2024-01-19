@@ -23,7 +23,8 @@ end
 map("n", "<C-s>", save, "save file")
 
 -- Close buffer and go to the previous one
-map("n", "<C-q>", ":bdelete!<CR>:bprev<CR>", "forcefully [q]uit buffer")
+map("n", "<C-Q>", ":bnext<CR>:bdelete!#<CR>", "forcefully [q]uit buffer")
+map("n", "<C-q>", ":bnext<CR>:bdelete#<CR>", "[q]uit buffer")
 
 -- Mappings for cycling buffers
 map("n", "<C-h>", ":bprev<CR>", "previous buffer")

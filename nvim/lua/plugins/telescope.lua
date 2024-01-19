@@ -12,15 +12,7 @@ local function apply_keymaps()
 
   map("<leader>fr", builtin.oldfiles, "[f]ind [r]ecent files")
   map("<leader>b", builtin.buffers, "[f]ind [b]uffers")
-  map("<leader>/", function()
-    builtin.current_buffer_fuzzy_find({
-      previewer = false,
-      layout_config = {
-        width = 0.5,
-        height = 0.5,
-      },
-    })
-  end, "find in current file")
+  map("<leader>/", builtin.current_buffer_fuzzy_find, "find in current file")
 
   map("<leader>f/", function()
     builtin.live_grep({
@@ -37,14 +29,7 @@ local function apply_keymaps()
   map("<leader>fd", builtin.diagnostics, "[f]ind [d]iagnostics")
   map("<leader>fr", builtin.resume, "[f]ind [r]esume previous")
 
-  map("<leader>fb", function()
-    telescope.extensions.file_browser.file_browser({
-      path = vim.fn.expand("%:p:h"),
-      cwd_to_path = true,
-      hidden = true,
-    })
-  end, "[f]ile [b]rowser")
-
+  map("<leader>fb", telescope.extensions.file_browser.file_browser, "[f]ile [b]rowser")
   map("<leader>fn", telescope.extensions.notify.notify, "[f]ind [n]otifications")
   map("<leader>fm", telescope.extensions.noice.noice, "[f]ind [m]messages")
 end
@@ -98,10 +83,32 @@ local function config()
         },
       },
     },
+    pickers = {
+      buffers = {
+        show_all_buffers = true,
+        sort_mru = true,
+        mappings = {
+          i = {
+            ["<M-d>"] = actions.delete_buffer,
+          }
+        }
+      },
+      current_buffer_fuzzy_find = {
+        previewer = false,
+        layout_config = {
+          width = 0.5,
+          height = 0.5,
+        },
+      }
+    },
     extensions = {
       file_browser = {
         git_status = false,
         hijack_netrw = true,
+        path = vim.fn.expand("%:p:h"),
+        cwd_to_path = true,
+        hidden = { file_browser = true, folder_browser = true },
+        no_ignore = true,
       },
       ["ui-select"] = {
         layout_config = {

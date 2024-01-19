@@ -22,8 +22,8 @@ config.use_fancy_tab_bar = false
 config.tab_max_width = 20
 
 config.inactive_pane_hsb = {
-  saturation = 0.7,
-  brightness = 0.9,
+  saturation = 1.0,
+  brightness = 1.0,
 }
 
 config.window_padding = {
