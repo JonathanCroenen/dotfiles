@@ -27,48 +27,48 @@ config.inactive_pane_hsb = {
 }
 
 config.window_padding = {
-  left = 1, right = 1,
-  top = 1, bottom = 1,
+  left = 1,
+  right = 1,
+  top = 1,
+  bottom = 1,
 }
 
 -- [[ Keymappings ]]
 local action = wezterm.action
 
+config.leader = { key = "e", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
   -- [[ Pane Management ]]
-  { key = "_", mods = "CTRL|SHIFT", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-  { key = "|", mods = "CTRL|SHIFT", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-  { key = "d", mods = "CTRL|SHIFT", action = action.CloseCurrentPane({ confirm = true }) },
+  { key = "-", mods = "LEADER", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  { key = "\\", mods = "LEADER", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  { key = "w", mods = "LEADER", action = action.CloseCurrentPane({ confirm = true }) },
 
-  { key = "z", mods = "CTRL|SHIFT", action = action.TogglePaneZoomState },
+  { key = "z", mods = "LEADER", action = action.TogglePaneZoomState },
 
-  { key = "h", mods = "CTRL|SHIFT", action = action.ActivatePaneDirection("Left") },
-  { key = "l", mods = "CTRL|SHIFT", action = action.ActivatePaneDirection("Right") },
-  { key = "j", mods = "CTRL|SHIFT", action = action.ActivatePaneDirection("Down") },
-  { key = "k", mods = "CTRL|SHIFT", action = action.ActivatePaneDirection("Up") },
+  { key = "h", mods = "LEADER", action = action.ActivatePaneDirection("Left") },
+  { key = "l", mods = "LEADER", action = action.ActivatePaneDirection("Right") },
+  { key = "j", mods = "LEADER", action = action.ActivatePaneDirection("Down") },
+  { key = "k", mods = "LEADER", action = action.ActivatePaneDirection("Up") },
 
-  { key = "LeftArrow", mods = "CTRL|SHIFT", action = action.AdjustPaneSize({ "Left", 2 }) },
-  { key = "RightArrow", mods = "CTRL|SHIFT", action = action.AdjustPaneSize({"Right", 2}) },
-  { key = "DownArrow", mods = "CTRL|SHIFT", action = action.AdjustPaneSize({"Down", 2}) },
-  { key = "UpArrow", mods = "CTRL|SHIFT", action = action.AdjustPaneSize({"Up", 2}) },
+  { key = "LeftArrow", mods = "LEADER", action = action.AdjustPaneSize({ "Left", 5 }) },
+  { key = "RightArrow", mods = "LEADER", action = action.AdjustPaneSize({ "Right", 5 }) },
+  { key = "DownArrow", mods = "LEADER", action = action.AdjustPaneSize({ "Down", 5 }) },
+  { key = "UpArrow", mods = "LEADER", action = action.AdjustPaneSize({ "Up", 5 }) },
 
   -- [[ Tab Management ]]
-  { key = "t", mods = "CTRL|SHIFT", action = action.SpawnTab("CurrentPaneDomain") },
-  { key = "w", mods = "CTRL|SHIFT", action = action.CloseCurrentTab({ confirm = true }) },
+  { key = "t", mods = "LEADER", action = action.SpawnTab("CurrentPaneDomain") },
+  { key = "d", mods = "LEADER", action = action.CloseCurrentTab({ confirm = true }) },
 
-  { key = "Tab", mods = "CTRL", action = action.ActivateTabRelative(1) },
-  { key = "Tab", mods = "CTRL|SHIFT", action = action.ActivateTabRelative(-1) },
-
-  { key = "!", mods = "CTRL|SHIFT", action = action.ActivateTab(0) },
-  { key = "@", mods = "CTRL|SHIFT", action = action.ActivateTab(1) },
-  { key = "#", mods = "CTRL|SHIFT", action = action.ActivateTab(2) },
-  { key = "$", mods = "CTRL|SHIFT", action = action.ActivateTab(3) },
-  { key = "%", mods = "CTRL|SHIFT", action = action.ActivateTab(4) },
-  { key = "^", mods = "CTRL|SHIFT", action = action.ActivateTab(5) },
-  { key = "^", mods = "CTRL|SHIFT", action = action.ActivateTab(6) },
-  { key = "&", mods = "CTRL|SHIFT", action = action.ActivateTab(7) },
-  { key = "(", mods = "CTRL|SHIFT", action = action.ActivateTab(8) },
-  { key = ")", mods = "CTRL|SHIFT", action = action.ActivateTab(-1) },
+  { key = "1", mods = "LEADER", action = action.ActivateTab(0) },
+  { key = "2", mods = "LEADER", action = action.ActivateTab(1) },
+  { key = "3", mods = "LEADER", action = action.ActivateTab(2) },
+  { key = "4", mods = "LEADER", action = action.ActivateTab(3) },
+  { key = "5", mods = "LEADER", action = action.ActivateTab(4) },
+  { key = "6", mods = "LEADER", action = action.ActivateTab(5) },
+  { key = "7", mods = "LEADER", action = action.ActivateTab(6) },
+  { key = "8", mods = "LEADER", action = action.ActivateTab(7) },
+  { key = "9", mods = "LEADER", action = action.ActivateTab(8) },
+  { key = "0", mods = "LEADER", action = action.ActivateTab(-1) },
 
   -- [[ Motions ]]
   { key = "0", mods = "ALT", action = action.SendKey({ key = "Home" }) },
@@ -81,4 +81,3 @@ config.keys = {
 }
 
 return config
-
