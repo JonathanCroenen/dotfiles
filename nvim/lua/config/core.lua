@@ -26,9 +26,9 @@ map("n", "<C-s>", save, "save file")
 map("n", "<C-Q>", ":bnext<CR>:bdelete!#<CR>", "forcefully [q]uit buffer")
 map("n", "<C-q>", ":bnext<CR>:bdelete#<CR>", "[q]uit buffer")
 
--- Mappings for cycling buffers
-map("n", "<C-h>", ":bprev<CR>", "previous buffer")
-map("n", "<C-l>", ":bnext<CR>", "next buffer")
+-- Mappings for cycling buffers NOTE: handled by cybu
+-- map("n", "<C-h>", ":bprev<CR>", "previous buffer")
+-- map("n", "<C-l>", ":bnext<CR>", "next buffer")
 
 -- Remove search highlights
 map("n", "<leader>h", ":nohlsearch<CR>", "remove search [h]ighlights")

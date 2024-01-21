@@ -45,53 +45,22 @@ local function apply_diagnostic_icons()
 end
 
 local function config()
-  local servers = {
-    clangd = { capabilities = { offsetEncoding = { "utf-16" } } },
-
-    lua_ls = {
-      settings = {
-        Lua = {
-          diagnostics = { globals = { "vim" } },
-          workspace = {
-            library = {
-              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-              [vim.fn.stdpath("config") .. "/lua"] = true,
-            },
-          },
-          telemetry = { enable = false },
-        },
-      },
-    },
-
-    html = {},
-    tsserver = {},
-    pyright = {},
-    rust_analyzer = {},
-    marksman = {},
-  }
-
   require("neodev").setup()
-
   require("mason").setup()
-  local mason_lspconfig = require("mason-lspconfig")
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-  mason_lspconfig.setup({
-    ensure_installed = vim.tbl_keys(servers),
-  })
-
-  mason_lspconfig.setup_handlers({
-    function(name)
-      require("lspconfig")[name].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = servers[name],
-        filetypes = (servers[name] or {}).filetypes,
-      })
-    end,
-  })
+  local lspconfig = require("lspconfig")
+  for name, settings in pairs(require("config.language-servers")) do
+    lspconfig[name].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = settings,
+      filetypes = settings.filetypes,
+    })
+  end
 
   local cmp = require("cmp")
   local luasnip = require("luasnip")
@@ -106,17 +75,17 @@ local function config()
     },
     mapping = cmp.mapping.preset.insert({
       ["<Up>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.close()
-          end
-          fallback()
-        end, { "i" }),
+        if cmp.visible() then
+          cmp.close()
+        end
+        fallback()
+      end, { "i" }),
       ["<Down>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.close()
-          end
-          fallback()
-        end, { "i" }),
+        if cmp.visible() then
+          cmp.close()
+        end
+        fallback()
+      end, { "i" }),
       ["<C-p>"] = cmp.mapping.scroll_docs(-2),
       ["<C-n>"] = cmp.mapping.scroll_docs(2),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete({}), { "i", "c" }),

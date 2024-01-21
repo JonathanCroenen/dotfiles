@@ -11,9 +11,9 @@ return {
       signature = {
         opts = {
           position = {
-            col = 50 -- is equal to cmp maxwidth to prevent overlap with completion menu
+            col = 50, -- is equal to cmp maxwidth to prevent overlap with completion menu
           },
-        }
+        },
       },
     },
     presets = {
@@ -21,7 +21,41 @@ return {
       command_palette = true,
       long_message_to_split = true,
       inc_rename = false,
-      lsp_doc_border = false,
+      lsp_doc_border = true,
+    },
+    views = {
+      cmdline_popup = {
+        position = {
+          row = "50%",
+          col = "50%",
+        },
+        border = {
+          style = "double",
+        },
+        win_options = {
+          winhighlight = { NormalFloat = "NormalFloat", FloatBorder = "FloatBorder" },
+        },
+      },
+      hover = {
+        border = {
+          style = "single",
+        },
+      },
+      confirm = {
+        border = {
+          style = "single",
+        },
+      },
+      popup = {
+        border = {
+          style = "single",
+        },
+      },
+      popupmenu = {
+        border = {
+          style = "single",
+        },
+      },
     },
   },
   format = {
@@ -30,8 +64,8 @@ return {
         error = require("config.icons").error,
         warn = require("config.icons").warn,
         info = require("config.icons").info,
-      }
-    }
+      },
+    },
   },
 
   dependencies = {
