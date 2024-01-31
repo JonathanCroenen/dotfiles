@@ -45,21 +45,25 @@ map("v", "K", ":m '<-2<CR>gv=gv", "move selection up")
 map("n", "<C-d>", "zz<C-d>", "half page [d]own")
 map("n", "<C-u>", "zz<C-u>", "half page [u]p")
 
--- Paste in visual mode and keep original clipboard
+-- Paste in visual mode (and) keep original clipboard
 map("v", "p", "\"_dP", "paste over selection")
 
 -- Mappings for surround replacement
-map("v", "S(", "<ESC>`>a)<ESC>`<i(<ESC>gv", "[s]urround selection with ()")
-map("v", "S[", "<ESC>`>a]<ESC>`<i[<ESC>gv", "[s]urround selection with []]")
-map("v", "S{", "<ESC>`>a}<ESC>`<i{<ESC>gv", "[s]urround selection with {}}")
-map("v", "S'", "<ESC>`>a'<ESC>`<i'<ESC>gv", "[s]urround selection with ''")
-map("v", "S\"", "<ESC>`>a\"<ESC>`<i\"<ESC>gv", "[s]urround selection with \"\"")
-map("v", "S`", "<ESC>`>a`<ESC>`<i`<ESC>gv", "[s]urround selection with ``")
-map("v", "S<", "<ESC>`>a<<ESC>`<i<<ESC>gv", "[s]urround selection with <>")
+map("v", "S(", "<ESC>`>a)<ESC>`<i(<ESC>lv`>l", "[s]urround selection with ()")
+map("v", "S[", "<ESC>`>a]<ESC>`<i[<ESC>lv`>l", "[s]urround selection with []]")
+map("v", "S{", "<ESC>`>a}<ESC>`<i{<ESC>lv`>l", "[s]urround selection with {}}")
+map("v", "S'", "<ESC>`>a'<ESC>`<i'<ESC>lv`>l", "[s]urround selection with ''")
+map("v", "S\"", "<ESC>`>a\"<ESC>`<i\"<ESC>lv`>l", "[s]urround selection with \"\"")
+map("v", "S`", "<ESC>`>a`<ESC>`<i`<ESC>lv`>l", "[s]urround selection with ``")
+map("v", "S<", "<ESC>`>a><ESC>`<i<<ESC>lv`>l", "[s]urround selection with <>")
+map("v", "Sd", "<ESC>`>lx`<hxv`>h", "[d]elete [s]urrounding characters")
 
 -- Remap to ease navigating wrapped lines
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Remap to open links
+map("n", "gx", ":execute '!xdg-open ' . shellescape(expand('<cfile>'), 1)<CR>", "[g]o to url")
 
 -- [[ Nice Auto Commands ]]
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {

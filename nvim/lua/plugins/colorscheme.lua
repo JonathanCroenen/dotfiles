@@ -7,14 +7,18 @@ local function config()
 
     styles = {
       bold = false,
-      italic = true,
+      italic = false,
       transparency = false,
-    }
+    },
+
+    highlight_groups = {
+      WinBar = { fg = "subtle", bg = "base" },
+      WinBarNC = { fg = "muted", bg = "base" },
+    },
   })
 
   vim.cmd.colorscheme("rose-pine")
 end
-
 
 return {
   {
@@ -22,6 +26,6 @@ return {
     name = "rose-pine",
     priority = 1000,
     lazy = false,
-    config = config
-  }
+    config = config,
+  },
 }

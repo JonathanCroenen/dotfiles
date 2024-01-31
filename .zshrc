@@ -2,14 +2,11 @@
 export ZSH="$HOME/.zsh"
 
 ZSH_THEME="custom"
-
 HYPHEN_INSENSITIVE="true"
 
-zstyle ':omz:update' mode auto
-zstyle ':omz:update' frequency 7
+zstyle ':omz:update' mode disabled
 
 ENABLE_CORRECTION="false"
-
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(
@@ -33,6 +30,7 @@ export LANG=en_US.UTF-8
 alias DGPU="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
 alias ls=colorls
 alias vim=nvim
+alias imgcat="wezterm imgcat"
 
 export MANPATH="/usr/local/man:$MANPATH"
 export PATH=$PATH:/home/jonathan/.local/bin:/home/jonathan/Dev/Bin:/usr/local/jdk1.8.0/bin

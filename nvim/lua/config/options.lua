@@ -48,10 +48,10 @@ local options = {
     precedes = "…",
     nbsp = "␣",
   },
+  laststatus = 2,
 }
 
 for k, v in pairs(options) do
---  print(string.format("Setting option %s -> %s", k, vim.inspect(v)))
   vim.opt[k] = v
 end
 

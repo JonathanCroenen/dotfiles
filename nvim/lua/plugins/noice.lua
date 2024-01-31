@@ -11,7 +11,7 @@ return {
       signature = {
         opts = {
           position = {
-            col = 50, -- is equal to cmp maxwidth to prevent overlap with completion menu
+            -- col = 50, -- is equal to cmp maxwidth to prevent overlap with completion menu
           },
         },
       },

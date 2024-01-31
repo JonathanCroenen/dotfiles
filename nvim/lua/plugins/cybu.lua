@@ -1,9 +1,17 @@
 local function config()
   local cybu = require("cybu")
   cybu.setup({
+    behavior = {
+      mode = {
+        last_used = {
+          view = "paging",
+        },
+      },
+    },
     style = {
       border = "single",
-    }
+    },
+    display_time = 600,
   })
 
   vim.keymap.set("n", "<C-h>", function() cybu.cycle("prev", "last_used") end, { silent = true, noremap = true })

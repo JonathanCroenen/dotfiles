@@ -35,9 +35,19 @@ local diff = {
   end,
 }
 
+local fileformat = {
+  "fileformat",
+  icons_enabled = true,
+}
+
 local filetype = {
   "filetype",
   icons_enabled = true,
+  symbols = {
+    unix = icons.unix,
+    dos = icons.windows,
+    mac = icons.mac,
+  }
 }
 
 return {
@@ -46,15 +56,15 @@ return {
     options = {
       icons_enabled = false,
       theme = "auto",
-      component_separator = "|",
-      section_separator = "",
+      component_separators = "│",
+      section_separators = "",
       disabled_filetypes = { "alpha", "dashboard" },
     },
     sections = {
       lualine_a = { "mode" },
       lualine_b = { "branch", diff, diagnostics },
       lualine_c = { "filename" },
-      lualine_x = { "encoding", "fileformat", filetype },
+      lualine_x = { "encoding", fileformat, filetype },
       lualine_y = { "location" },
       lualine_z = { progress },
     },
