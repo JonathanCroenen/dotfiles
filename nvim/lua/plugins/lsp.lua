@@ -47,6 +47,7 @@ end
 local function config()
   require("neodev").setup()
   require("mason").setup()
+  require("mason-lspconfig").setup()
   config_navic()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -54,16 +55,16 @@ local function config()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   local lspconfig = require("lspconfig")
-  for name, settings in pairs(require("config.language-servers")) do
-    lspconfig[name].setup({
-      capabilities = capabilities,
+  for name, specific_settings in pairs(require("config.language-servers")) do
+    local settings = {
       on_attach = on_attach,
-      settings = settings,
-      filetypes = settings.filetypes,
-    })
+      capabilities = capabilities
+    }
+
+    settings = vim.tbl_deep_extend("force", specific_settings, settings)
+    lspconfig[name].setup(settings)
   end
 end
-
 
 return {
   {

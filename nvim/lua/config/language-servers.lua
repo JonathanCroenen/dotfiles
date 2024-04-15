@@ -1,5 +1,5 @@
 return {
-  clangd = { capabilities = { offsetEncoding = { "utf-16" } } },
+  clangd = { capabilities = { offsetEncoding = { "utf-8" } } },
 
   lua_ls = {
     settings = {
@@ -21,5 +21,9 @@ return {
   pyright = {},
   rust_analyzer = {},
   marksman = {},
-  racket_langserver = {},
+  texlab = {},
+  omnisharp = {},
+  grammarly = {
+    filetypes = { "markdown", "tex", "plaintex" },
+  },
 }

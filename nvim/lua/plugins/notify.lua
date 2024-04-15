@@ -4,7 +4,7 @@ local function config()
 
   notify.setup({
     timeout = 3000,
-    max_width = 120,
+    max_width = 60,
     render = "default",
     stages = "fade",
     icons = {

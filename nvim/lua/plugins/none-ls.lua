@@ -10,9 +10,7 @@ local function config()
       formatting.black,
       formatting.prettier,
       formatting.stylua,
-      formatting.trim_whitespace,
       formatting.clang_format,
-      formatting.rustfmt,
       formatting.ocamlformat,
       diagnostics.todo_comments,
     }

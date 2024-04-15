@@ -37,9 +37,11 @@ export PATH=$PATH:/home/jonathan/.local/bin:/home/jonathan/Dev/Bin:/usr/local/jd
 export PATH=$PATH:/usr/local/cuda-12.3/bin:/home/jonathan/.ghcup/bin:/home/jonathan/.cargo/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64/:/home/jonathan/Dev/Lib/
 
-export CONDA_AUTO_ACTIVATE_BASE=false
+export XDG_CONFIG_HOME=$HOME/.config
 
 # Conda
+export CONDA_AUTO_ACTIVATE_BASE=false
+
 __conda_setup="$('/home/jonathan/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
