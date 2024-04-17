@@ -1,3 +1,4 @@
+# options
 unsetopt AUTO_CD
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
@@ -16,6 +17,7 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
 
+# colors
 autoload -U colors; colors
 
 # custom
@@ -26,4 +28,10 @@ source "$ZDOTDIR/prompt.zsh-theme"
 # plugins
 source "$ZDOTDIR/plugins/completion.zsh"
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$ZDOTDIR/plugins/vim-mode.zsh"
+source "$ZDOTDIR/plugins/sudo.zsh"
+source "$ZDOTDIR/plugins/conda.zsh"
+source "$ZDOTDIR/plugins/nvm.zsh"
+source "$ZDOTDIR/plugins/opam.zsh"
+

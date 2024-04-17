@@ -3,8 +3,9 @@ alias shutdown='sudo shutdown -h now'
 alias reboot='sudo reboot'
 alias suspend='systemctl suspend'
 
-# neovim 
+# tools
 alias vim='nvim'
+alias imgcat='wezterm imgcat'
 
 # ls
 alias ls='colorls --sd -A'
@@ -30,6 +31,7 @@ alias ga='git add'
 alias gps='git push'
 alias gpl='git pull'
 alias gc='git commit'
+alias gcm='git commit -m'
 alias gbn='git checkout -b'
 alias gd='git diff'
 alias gl='git log --graph --abbrev-commit --oneline --decorate'
@@ -38,4 +40,4 @@ alias gm='git merge'
 # misc
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 alias timeit='/usr/bin/time'
-
+alias DGPU="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
