@@ -36,6 +36,7 @@ alias gbn='git checkout -b'
 alias gd='git diff'
 alias gl='git log --graph --abbrev-commit --oneline --decorate'
 alias gm='git merge'
+alias gor='git open-remote'
 
 # misc
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"

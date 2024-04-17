@@ -77,12 +77,6 @@ config.keys = {
   { key = "9",          mods = "CTRL|SHIFT", action = action.ActivateTab(8) },
   { key = "0",          mods = "CTRL|SHIFT", action = action.ActivateTab(-1) },
 
-  -- [[ Motions ]]
-  { key = "0",          mods = "ALT",        action = action.SendKey({ key = "Home" }) },
-  { key = "4",          mods = "ALT",        action = action.SendKey({ key = "End" }) },
-  { key = "h",          mods = "ALT",        action = action.SendKey({ key = "LeftArrow" }) },
-  { key = "l",          mods = "ALT",        action = action.SendKey({ key = "RightArrow" }) },
-
   -- [[ Miscelaneous ]]
   { key = "F11",        mods = "",           action = action.ToggleFullScreen },
 
