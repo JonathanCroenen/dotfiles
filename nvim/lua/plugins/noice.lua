@@ -1,7 +1,5 @@
-return {
-  "folke/noice.nvim",
-  event = "VeryLazy",
-  opts = {
+local function config()
+  require("noice").setup({
     lsp = {
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -57,18 +55,27 @@ return {
         },
       },
     },
-  },
-  format = {
-    level = {
-      icons = {
-        error = require("config.icons").error,
-        warn = require("config.icons").warn,
-        info = require("config.icons").info,
+    format = {
+      level = {
+        icons = {
+          error = require("config.icons").error,
+          warn = require("config.icons").warn,
+          info = require("config.icons").info,
+        },
       },
     },
-  },
+  })
+
+  pcall(require("telescope").load_extension, "noice")
+end
+
+return {
+  "folke/noice.nvim",
+  event = "VeryLazy",
+  config = config,
 
   dependencies = {
     "MunifTanjim/nui.nvim",
+    "nvim-telescope/telescope.nvim",
   },
 }

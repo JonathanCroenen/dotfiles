@@ -122,8 +122,6 @@ local function config()
   pcall(telescope.load_extension, "fzf")
   pcall(telescope.load_extension, "file_browser")
   pcall(telescope.load_extension, "ui-select")
-  pcall(telescope.load_extension, "noice")
-  pcall(telescope.load_extension, "notify")
 
   apply_style()
   apply_keymaps()

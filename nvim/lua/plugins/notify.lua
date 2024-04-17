@@ -22,10 +22,16 @@ local function config()
   })
 
   vim.notify = notify
+
+  pcall(require("telescope").load_extension, "notify")
 end
 
 return {
   "rcarriga/nvim-notify",
   event = "VeryLazy",
   config = config,
+
+  dependencies = {
+    "nvim-telescope/telescope.nvim",
+  }
 }
