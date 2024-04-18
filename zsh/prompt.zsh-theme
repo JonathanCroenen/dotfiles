@@ -1,8 +1,8 @@
-function virtualenv_info {
+function prompt_virtualenv_info {
     [[ -n $VIRTUAL_ENV ]] && echo '%F{white}(%F{green}'`basename $VIRTUAL_ENV`'%F{white}) '
 }
 
-function git_prompt_status {
+function prompt_git_status {
   local INDEX STATUS
 
   INDEX=$(command git status --porcelain -b 2> /dev/null)
@@ -31,10 +31,10 @@ function git_prompt_status {
 }
 
 function prompt_git_info {
-    [ ! -z "$vcs_info_msg_0_" ] && echo "%F{white}(%F{red}${vcs_info_msg_0_}$(git_prompt_status)%F{white})%f"
+    [ ! -z "$vcs_info_msg_0_" ] && echo "%F{white}(%F{red}${vcs_info_msg_0_}$(prompt_git_status)%F{white})%f "
 }
 
-function prompt_path {
+function prompt_path_info {
     local dir
     dir=${PWD/#$HOME/\~}  # Replace home directory with ~
     local IFS='/'          # Set the Internal Field Separator to '/'
@@ -46,7 +46,7 @@ function prompt_path {
             dir="$dir/${components[$i]}"
         done
     fi
-    echo "%F{white}[%F{cyan}$dir%F{white}]%f"
+    echo "%F{white}[%F{cyan}$dir%F{white}]%f "
 }
 
 setopt PROMPT_SUBST
@@ -59,9 +59,9 @@ function precmd {
     vcs_info
 
     PROMPT=" %(?:%F{green}•%f:%F{red}•%f) "
-    PROMPT+="$(virtualenv_info) "
-    PROMPT+="$(prompt_path) "
-    PROMPT+="$(prompt_git_info) "
+    PROMPT+="$(prompt_virtualenv_info)"
+    PROMPT+="$(prompt_path_info)"
+    PROMPT+="$(prompt_git_info)"
     PROMPT+="%F{white}->%f "
 
     RPROMPT="%F{white}[%F{green}%*%F{white}]%f"
