@@ -1,5 +1,11 @@
 function prompt_virtualenv_info {
-    [[ -n $VIRTUAL_ENV ]] && echo '%F{white}(%F{green}'`basename $VIRTUAL_ENV`'%F{white}) '
+  local env_name=""
+  if [[ -n $VIRTUAL_ENV ]]; then
+    env_name=$(basename $VIRTUAL_ENV)
+  elif [[ -n $CONDA_PREFIX ]]; then
+    env_name=$(basename $CONDA_PREFIX)
+  fi
+  [[ -n $env_name ]] && echo "%F{white}(%F{green}$env_name%F{white}) "
 }
 
 function prompt_git_status {
