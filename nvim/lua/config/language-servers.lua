@@ -26,4 +26,13 @@ return {
   grammarly = {
     filetypes = { "markdown", "tex", "plaintex" },
   },
+  matlab_ls = {
+    single_file_support = true,
+    settings = {
+      MATLAB = {
+        indexWorkspace = true,
+        telemetry = false,
+      },
+    },
+  },
 }

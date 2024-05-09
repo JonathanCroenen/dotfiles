@@ -3,7 +3,7 @@ local function apply_diagnostic_icons()
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
-
+  
   local icons = require("config.icons")
   set_diagnostic_sign("Error", icons.error)
   set_diagnostic_sign("Warn", icons.warn)
@@ -13,7 +13,7 @@ end
 
 local function cmp_formatting(_, vim_item)
   vim_item.kind = string.format("%s%s", require("config.icons")[vim_item.kind], vim_item.kind)
-  local MAX_LABEL_WIDTH = 40
+  local MAX_LABEL_WIDTH = 60
   local label = vim_item.abbr
   local truncated = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
   if truncated ~= label then

@@ -15,9 +15,18 @@ local function config()
       "vim",
       "bash",
     },
-    auto_install = false,
+    auto_install = true,
     sync_install = true,
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      disable = function(lang, buf)
+        local max_filesize = 100 * 1024 -- 100 KB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+          return true
+        end
+      end,
+    },
     indent = { enable = true },
     incremental_selection = {
       enable = true,
@@ -25,7 +34,7 @@ local function config()
         init_selection = "<C-Space>",
         node_incremental = "<C-Space>",
         scope_incremental = "<C-S>",
-        node_decremental = "<M-Space>",
+        node_decremental = "<S-Space>",
       },
     },
     textobjects = {
@@ -35,42 +44,35 @@ local function config()
         set_jumps = true,
         goto_next_start = {
           ["]m"] = "@function.outer",
-          ["]]"] = "@class.outer",
+          ["]c"] = "@class.outer",
         },
         goto_next_end = {
           ["]M"] = "@function.outer",
-          ["]["] = "@class.outer",
+          ["]C"] = "@class.outer",
         },
         goto_previous_start = {
           ["[m"] = "@function.outer",
-          ["[["] = "@class.outer",
+          ["[c"] = "@class.outer",
         },
         goto_previous_end = {
           ["[M"] = "@function.outer",
-          ["[]"] = "@class.outer",
+          ["[C"] = "@class.outer",
         },
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<leader>a"] = "@parameter.inner",
-      },
-      swap_previous = {
-        ["<leader>A"] = "@parameter.inner",
       },
     },
   })
 end
 
-
-
 return {
   "nvim-treesitter/nvim-treesitter",
+  tag = "v0.9.2", -- Fix for bug on neovim nightly
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
   event = { "BufReadPre", "BufNewFile" },
-  build = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
+  build = function()
+    require("nvim-treesitter.install").update({ with_sync = true })
+  end,
+
   config = config,
 }

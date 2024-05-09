@@ -44,6 +44,7 @@ source "$ZDOTDIR/scripts.zsh"
 source "$ZDOTDIR/prompt.zsh-theme"
 
 # plugins
+source "$ZDOTDIR/plugins/per-directory-history.zsh"
 source "$ZDOTDIR/plugins/completion.zsh"
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$ZDOTDIR/plugins/autosuggestions.zsh"

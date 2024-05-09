@@ -5,6 +5,12 @@ local function config()
     dim_inactive_windows = false,
     extend_background_behind_borders = false,
 
+  enable = {
+        terminal = true,
+        legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+        migrations = true, -- Handle deprecated options automatically
+    },
+
     styles = {
       bold = false,
       italic = false,
@@ -14,6 +20,7 @@ local function config()
     highlight_groups = {
       WinBar = { fg = "subtle", bg = "base" },
       WinBarNC = { fg = "muted", bg = "base" },
+      ["@float"] = { link = "Number" },
     },
   })
 

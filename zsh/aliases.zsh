@@ -19,13 +19,14 @@ alias mv='mv -iv'
 alias rm='rm -iv'
 
 # apt
-alias aptu='sudo apt update'
+alias aptup='sudo apt update'
 alias aptug='sudo apt update && sudo apt upgrade'
 alias apti='sudo apt install'
 alias aptr='sudo apt remove'
 alias aptl='apt list'
 
 # git
+alias gcl='git clone'
 alias gs='git status -s'
 alias ga='git add'
 alias gps='git push'
