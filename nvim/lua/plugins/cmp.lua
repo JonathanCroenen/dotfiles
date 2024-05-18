@@ -3,7 +3,7 @@ local function apply_diagnostic_icons()
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
-  
+
   local icons = require("config.icons")
   set_diagnostic_sign("Error", icons.error)
   set_diagnostic_sign("Warn", icons.warn)
@@ -13,6 +13,7 @@ end
 
 local function cmp_formatting(_, vim_item)
   vim_item.kind = string.format("%s%s", require("config.icons")[vim_item.kind], vim_item.kind)
+
   local MAX_LABEL_WIDTH = 60
   local label = vim_item.abbr
   local truncated = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
@@ -36,45 +37,33 @@ local function config()
         luasnip.lsp_expand(args.body)
       end,
     },
-    mapping = cmp.mapping.preset.insert({
-      ["<Up>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.close()
-        end
-        fallback()
-      end, { "i" }),
-      ["<Down>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.close()
-        end
-        fallback()
-      end, { "i" }),
+    mapping = {
       ["<C-p>"] = cmp.mapping.scroll_docs(-2),
       ["<C-n>"] = cmp.mapping.scroll_docs(2),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete({}), { "i", "c" }),
-      ["<CR>"] = cmp.mapping.confirm({
+      ["<C-e>"] = cmp.mapping.abort(),
+      ["<C-y>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Insert,
-        select = false,
+        select = true
       }),
-      ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif luasnip.expand_or_locally_jumpable() then
+      ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+      ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+
+      ["<C-f>"] = cmp.mapping(function(fb)
+        if luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
         else
-          fallback()
+          fb()
         end
-      end, { "i", "s" }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.locally_jumpable(-1) then
+      end),
+      ["<C-b>"] = cmp.mapping(function(fb)
+        if luasnip.jumpable(-1) then
           luasnip.jump(-1)
         else
-          fallback()
+          fb()
         end
-      end, { "i", "s" }),
-    }),
+      end),
+    },
     formatting = {
       fields = { "abbr", "kind" },
       expandable_indicator = true,
@@ -105,7 +94,7 @@ local function config()
         },
       },
     }, {
-      { name = "buffer" },
+      { name = "buffer", keyword_length = 5 },
     }),
   })
 
@@ -128,7 +117,6 @@ local function config()
   vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 end
 
-
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -141,9 +129,11 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
 
-      "L3MON4D3/LuaSnip",
+      { "L3MON4D3/LuaSnip",
+        build = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" }
+      },
       "saadparwaiz1/cmp_luasnip",
-      "rafamadriz/friendly-snippets",
     },
   },
 }
