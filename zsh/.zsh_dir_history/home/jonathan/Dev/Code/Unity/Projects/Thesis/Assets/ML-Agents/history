@@ -1,5 +1,0 @@
-: 1715243870:0;conda activate mlagents
-: 1715243930:0;mlagents-learn Configs/forward_pass_simple.yaml --env=../../Builds/ForwardPassEnv.x86_64 --run-id=FowardPassDebug --resume
-: 1715243942:0;ls Results
-: 1715243959:0;mlagents-learn Configs/forward_pass_simple.yaml --env=../../Builds/ForwardPassEnv.x86_64 --run-id=ForwardPassDebug --resume
-: 1715244003:0;cd ..
