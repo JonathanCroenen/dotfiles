@@ -9,14 +9,85 @@ config.audible_bell = "Disabled"
 config.check_for_updates = false
 
 -- [[ Appearance ]]
-config.font = wezterm.font("JetBrains Mono Nerd Font Mono")
+config.font = wezterm.font_with_fallback({
+  "JetBrainsMono Nerd Font Mono",
+  "SF Mono"
+})
 config.font_size = 11.5
 
 config.initial_cols = 135
 config.initial_rows = 32
 
-config.colors = require("lua/rose-pine").colors()
-config.window_frame = require("lua/rose-pine").window_frame()
+local palette = {
+  base = '#191724',
+  overlay = '#26233a',
+  muted = '#6e6a86',
+  text = '#e0def4',
+  love = '#eb6f92',
+  gold = '#f6c177',
+  rose = '#ebbcba',
+  pine = '#31748f',
+  foam = '#9ccfd8',
+  iris = '#c4a7e7',
+  highlight_high = '#524f67',
+}
+
+local active_tab = {
+  bg_color = palette.overlay,
+  fg_color = palette.text,
+}
+
+local inactive_tab = {
+  bg_color = palette.base,
+  fg_color = palette.muted,
+}
+
+config.colors = {
+  foreground = palette.text,
+  background = palette.base,
+  cursor_bg = palette.highlight_high,
+  cursor_border = palette.highlight_high,
+  cursor_fg = palette.text,
+  selection_bg = '#2a283e',
+  selection_fg = palette.text,
+
+  ansi = {
+    palette.overlay,
+    palette.love,
+    palette.pine,
+    palette.gold,
+    palette.foam,
+    palette.iris,
+    palette.rose,
+    palette.text,
+  },
+
+  brights = {
+    palette.muted,
+    palette.love,
+    palette.pine,
+    palette.gold,
+    palette.foam,
+    palette.iris,
+    palette.rose,
+    palette.text,
+  },
+
+  tab_bar = {
+    background = palette.base,
+    active_tab = active_tab,
+    inactive_tab = inactive_tab,
+    inactive_tab_hover = active_tab,
+    new_tab = inactive_tab,
+    new_tab_hover = active_tab,
+    inactive_tab_edge = palette.muted,
+  },
+}
+
+config.window_frame = {
+  active_titlebar_bg = palette.base,
+  inactive_titlebar_bg = palette.base,
+}
 
 config.hide_tab_bar_if_only_one_tab = false
 config.use_fancy_tab_bar = false
@@ -45,7 +116,7 @@ local action = wezterm.action
 config.keys = {
   -- [[ Pane Management ]]
   { key = "_",          mods = "CTRL|SHIFT", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-  { key = "|",         mods = "CTRL|SHIFT", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  { key = "|",          mods = "CTRL|SHIFT", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
   { key = "q",          mods = "CTRL|SHIFT", action = action.CloseCurrentPane({ confirm = true }) },
 
   { key = "z",          mods = "CTRL|SHIFT", action = action.TogglePaneZoomState },
