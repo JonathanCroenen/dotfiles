@@ -20,6 +20,23 @@ setopt HIST_VERIFY
 # colors
 autoload -U colors; colors
 
+# custom
+source "$ZDOTDIR/aliases.zsh"
+source "$ZDOTDIR/scripts.zsh"
+source "$ZDOTDIR/prompt.zsh-theme"
+
+# plugins
+source "$ZDOTDIR/plugins/per-directory-history.zsh"
+source "$ZDOTDIR/plugins/completion.zsh"
+source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZDOTDIR/plugins/autosuggestions.zsh"
+source "$ZDOTDIR/plugins/vim-mode.zsh"
+source "$ZDOTDIR/plugins/sudo.zsh"
+source "$ZDOTDIR/plugins/conda-integration.zsh"
+source "$ZDOTDIR/plugins/nvm-integration.zsh"
+source "$ZDOTDIR/plugins/opam-integration.zsh"
+source "$ZDOTDIR/plugins/fzf-integration.zsh"
+
 # history completion
 autoload -Uz up-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search
@@ -39,19 +56,3 @@ bindkey -M viins "^L" autosuggest-accept
 # fix for insert -> type -> normal -> insert -> cant backspace anymore
 bindkey "^?" backward-delete-char
 
-# custom
-source "$ZDOTDIR/aliases.zsh"
-source "$ZDOTDIR/scripts.zsh"
-source "$ZDOTDIR/prompt.zsh-theme"
-
-# plugins
-source "$ZDOTDIR/plugins/per-directory-history.zsh"
-source "$ZDOTDIR/plugins/completion.zsh"
-source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$ZDOTDIR/plugins/autosuggestions.zsh"
-source "$ZDOTDIR/plugins/vim-mode.zsh"
-source "$ZDOTDIR/plugins/sudo.zsh"
-source "$ZDOTDIR/plugins/conda-integration.zsh"
-source "$ZDOTDIR/plugins/nvm-integration.zsh"
-source "$ZDOTDIR/plugins/opam-integration.zsh"
-source "$ZDOTDIR/plugins/fzf-integration.zsh"
