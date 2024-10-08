@@ -8,10 +8,10 @@ alias vim='nvim'
 alias imgcat='wezterm imgcat'
 
 # ls
-alias ls='colorls --sd -A'
-alias lsa='colorls --sd -la'
-alias lsd='colorls --sd -d'
-alias lsf='colorls --sd -f'
+# alias ls='colorls --sd -A'
+# alias lsa='colorls --sd -la'
+# alias lsd='colorls --sd -d'
+# alias lsf='colorls --sd -f'
 
 # file operations
 alias cp='cp -iv'
