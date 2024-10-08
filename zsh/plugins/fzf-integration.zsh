@@ -24,4 +24,4 @@ export FZF_DEFAULT_OPTS="--border sharp \
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree ls"
 
-source "/usr/share/doc/fzf/examples/key-bindings.zsh"
+source "$ZDOTDIR/plugins/fzf-bindings.zsh"
