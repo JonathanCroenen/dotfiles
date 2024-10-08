@@ -34,6 +34,7 @@ bindkey -M vicmd "j" down-line-or-beginning-search
 
 bindkey -M viins "^K" up-line-or-beginning-search
 bindkey -M viins "^J" down-line-or-beginning-search
+bindkey -M viins "^L" autosuggest-accept
 
 # fix for insert -> type -> normal -> insert -> cant backspace anymore
 bindkey "^?" backward-delete-char
