@@ -42,4 +42,3 @@ alias gor='git open-remote'
 # misc
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 alias timeit='/usr/bin/time'
-alias DGPU="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"

@@ -15,7 +15,7 @@ export SAVEHIST=10000
 
 # vars
 export TERM="xterm-256color"
-export DOTFILES="$HOME/Dev/Dotfiles"
+export DOTFILES="$HOME/Dev/dotfiles"
 
 # editor
 export EDITOR="nvim"
@@ -27,6 +27,4 @@ export MANPAGER="nvim +Man!"
 # path
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-
-# lib path
 
