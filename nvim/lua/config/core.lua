@@ -23,8 +23,17 @@ end
 map("n", "<C-s>", save, "save file")
 
 -- Close buffer and go to the previous one
-map("n", "<C-Q>", ":bnext<CR>:bdelete!#<CR>", "forcefully [q]uit buffer")
-map("n", "<C-q>", ":bnext<CR>:bdelete#<CR>", "[q]uit buffer")
+map("n", "<leader>q", ":bnext<CR>:bdelete!#<CR>", "forcefully [q]uit buffer")
+map("n", "<C-q>", function()
+  vim.cmd.bnext()
+  local ok, msg = pcall(vim.cmd.bd, "#")
+  if not ok then
+    vim.cmd.b("#")
+    if msg ~= nil then
+      vim.api.nvim_err_writeln(msg)
+    end
+  end
+end, "[q]uit buffer")
 
 -- Mappings for cycling buffers NOTE: handled by cybu
 -- map("n", "<C-h>", ":bprev<CR>", "previous buffer")

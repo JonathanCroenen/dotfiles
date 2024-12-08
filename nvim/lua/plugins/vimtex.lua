@@ -114,11 +114,11 @@ local function config()
     continuous = 1,
     hooks = {},
     options = {
+      "-shell-escape",
       "-verbose",
       "-file-line-error",
       "-synctex=1",
       "-interaction=nonstopmode",
-      "-emulate-aux-dir"
     },
   }
 

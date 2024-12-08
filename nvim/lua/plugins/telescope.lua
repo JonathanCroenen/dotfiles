@@ -30,8 +30,6 @@ local function apply_keymaps()
   map("<leader>fr", builtin.resume, "[f]ind [r]esume previous")
 
   map("<leader>fb", telescope.extensions.file_browser.file_browser, "[f]ile [b]rowser")
-  map("<leader>fn", telescope.extensions.notify.notify, "[f]ind [n]otifications")
-  map("<leader>fm", telescope.extensions.noice.noice, "[f]ind [m]messages")
 end
 
 local function apply_style()
@@ -137,9 +135,6 @@ return {
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
-      cond = function()
-        return vim.fn.executable("make") == 1
-      end,
     },
     "nvim-telescope/telescope-file-browser.nvim",
     "nvim-telescope/telescope-ui-select.nvim",

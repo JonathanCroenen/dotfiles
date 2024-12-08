@@ -2,6 +2,7 @@ local function config()
   local notify = require("notify")
   local icons = require("config.icons")
 
+---@diagnostic disable-next-line: missing-fields
   notify.setup({
     timeout = 3000,
     max_width = 60,
@@ -23,15 +24,18 @@ local function config()
 
   vim.notify = notify
 
-  pcall(require("telescope").load_extension, "notify")
+  local telescope = require("telescope")
+  pcall(telescope.load_extension, "notify")
+  vim.keymap.set("n", "<leader>fn", telescope.extensions.notify.notify, { desc = "Telescope: [f]ind [n]otifications" })
 end
 
 return {
   "rcarriga/nvim-notify",
+  version = "*",
   event = "VeryLazy",
   config = config,
 
   dependencies = {
     "nvim-telescope/telescope.nvim",
-  }
+  },
 }

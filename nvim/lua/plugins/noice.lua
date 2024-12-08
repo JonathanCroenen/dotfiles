@@ -66,10 +66,13 @@ local function config()
     },
   })
 
-  pcall(require("telescope").load_extension, "noice")
+  local telescope = require("telescope")
+  pcall(telescope.load_extension, "noice")
+  vim.keymap.set("n", "<leader>fm", telescope.extensions.noice.noice, { desc = "Telescope: [f]ind [m]messages" })
 end
 
 return {
+  enabled = false,
   "folke/noice.nvim",
   event = "VeryLazy",
   config = config,

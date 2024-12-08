@@ -44,7 +44,7 @@ local function config()
       ["<C-e>"] = cmp.mapping.abort(),
       ["<C-y>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Insert,
-        select = true
+        select = true,
       }),
       ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
       ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
@@ -84,6 +84,7 @@ local function config()
           return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
         end,
       },
+      { name = "nvim_lsp_signature_help" },
       { name = "copilot" },
       { name = "luasnip" },
       {
@@ -128,10 +129,12 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
 
-      { "L3MON4D3/LuaSnip",
+      {
+        "L3MON4D3/LuaSnip",
         build = "make install_jsregexp",
-        dependencies = { "rafamadriz/friendly-snippets" }
+        dependencies = { "rafamadriz/friendly-snippets" },
       },
       "saadparwaiz1/cmp_luasnip",
     },

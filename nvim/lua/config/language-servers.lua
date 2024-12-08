@@ -17,7 +17,7 @@ return {
   },
 
   html = {},
-  tsserver = {},
+  ts_ls = {},
   pyright = {},
   rust_analyzer = {},
   marksman = {},

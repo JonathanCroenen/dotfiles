@@ -49,12 +49,9 @@ local options = {
     nbsp = "␣",
   },
   laststatus = 2,
+  pumheight = 10,
 }
 
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
-
--- vim.cmd("filetype on")
--- vim.cmd("filetype plugin off")
--- vim.cmd("filetype indent on")

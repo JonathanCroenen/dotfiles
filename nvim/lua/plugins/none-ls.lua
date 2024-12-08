@@ -19,6 +19,7 @@ end
 
 return {
   "nvimtools/none-ls.nvim",
+  commit = "6be90f8",
   name = "none-ls",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { "nvim-lua/plenary.nvim" },

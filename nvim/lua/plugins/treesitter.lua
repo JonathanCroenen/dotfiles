@@ -65,7 +65,6 @@ end
 
 return {
   "nvim-treesitter/nvim-treesitter",
-  tag = "v0.9.2", -- Fix for bug on neovim nightly
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
