@@ -41,9 +41,6 @@ else
   exit 1
 fi
 
-if [[ $OS == "Linux" ]]; then
-
-
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
