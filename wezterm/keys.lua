@@ -48,7 +48,7 @@ M.keys = {
       flags = "FUZZY|WORKSPACES",
     }),
   },
-  { key = "l",   mods = "CTRL|SHIFT", action = action.ShowLauncher },
+  -- { key = "l",   mods = "CTRL|SHIFT", action = action.ShowLauncher },
   { key = "r",   mods = "CTRL|SHIFT", action = action.ReloadConfiguration },
   { key = "F10", mods = "",           action = action.ShowDebugOverlay },
   { key = "F11", mods = "",           action = action.ToggleFullScreen },
