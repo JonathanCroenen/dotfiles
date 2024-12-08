@@ -20,24 +20,6 @@ setopt HIST_VERIFY
 # colors
 autoload -U colors; colors
 
-# history completion
-autoload -Uz up-line-or-beginning-search
-autoload -Uz down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-
-bindkey "^[[A" up-line-or-beginning-search
-bindkey "^[[B" down-line-or-beginning-search
-
-bindkey -M vicmd "k" up-line-or-beginning-search 
-bindkey -M vicmd "j" down-line-or-beginning-search
-
-bindkey -M viins "^K" up-line-or-beginning-search
-bindkey -M viins "^J" down-line-or-beginning-search
-
-# fix for insert -> type -> normal -> insert -> cant backspace anymore
-bindkey "^?" backward-delete-char
-
 # custom
 source "$ZDOTDIR/aliases.zsh"
 source "$ZDOTDIR/scripts.zsh"
@@ -54,3 +36,22 @@ source "$ZDOTDIR/plugins/conda-integration.zsh"
 source "$ZDOTDIR/plugins/nvm-integration.zsh"
 source "$ZDOTDIR/plugins/opam-integration.zsh"
 source "$ZDOTDIR/plugins/fzf-integration.zsh"
+
+# history completion
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
+bindkey -M vicmd "k" up-line-or-beginning-search 
+bindkey -M vicmd "j" down-line-or-beginning-search
+
+bindkey -M viins "^K" up-line-or-beginning-search
+bindkey -M viins "^J" down-line-or-beginning-search
+bindkey -M viins "^L" autosuggest-accept
+
+# fix for insert -> type -> normal -> insert -> cant backspace anymore
+bindkey "^?" backward-delete-char
