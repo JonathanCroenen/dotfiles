@@ -84,6 +84,53 @@ map("n", "<C-Down>", ":resize -2<CR>", "decrease split size")
 map("n", "<C-Left>", ":vertical resize +2<CR>", "increase vertical split size")
 map("n", "<C-Right>", ":vertical resize -2<CR>", "decrease vertical split size")
 
+-- LSP Mappings & Auto CMDs
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+
+    map("n", "<leader>lr", vim.lsp.buf.rename, "[r]ename")
+    map("n", "<leader>lf", vim.lsp.buf.format, "[f]ormat buffer")
+    map("n", "<leader>la", vim.lsp.buf.code_action, "code [a]ction")
+    map("n", "gd", require("telescope.builtin").lsp_definitions, "[g]o [d]efinition")
+    map("n", "gD", vim.lsp.buf.declaration, "[g]o [d]eclaration")
+    map("n", "gr", require("telescope.builtin").lsp_references, "[g]o [r]eferences")
+    map("n", "gI", require("telescope.builtin").lsp_implementations, "[g]o [i]mplementations")
+    map("n", "<leader>td", require("telescope.builtin").lsp_type_definitions, "[t]ype [d]efinitions")
+    map("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, "[d]ocument [s]ymbols")
+    map("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[w]orkspace [s]ymbols")
+
+    map("n", "[d", vim.diagnostic.goto_prev, "go previous [d]iagnostic")
+    map("n", "]d", vim.diagnostic.goto_next, "go next [d]iagnostic")
+    map("n", "<leader>df", vim.diagnostic.open_float, "open [d]iagnostic [f]loat")
+    map("n", "<leader>dq", vim.diagnostic.setloclist, "set [d]iagnostic quicklist")
+
+    map("n", "K", vim.lsp.buf.hover, "hover documentation")
+    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "[w]orkspace [a]dd folder")
+    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "[w]orkspace [r]emove folder")
+    map("n", "<leader>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, "[w]orkspace [l]ist folders")
+
+    if client.supports_method("textDocument/documentSymbol") then
+      require("nvim-navic").attach(client, args.buf)
+    end
+
+    -- Format on save
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = args.buf,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+        end,
+      })
+    end
+  end,
+})
+
 -- [[ Nice Auto Commands ]]
 -- Highlight yanked text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {

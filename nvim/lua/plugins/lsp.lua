@@ -1,43 +1,5 @@
-local on_attach = function(client, bufnr)
-  local map = function(keys, func, desc)
-    if desc then
-      desc = "LSP: " .. desc
-    end
-
-    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc, silent = true })
-  end
-
-  map("K", vim.lsp.buf.hover, "hover documentation")
-  map("gd", require("telescope.builtin").lsp_definitions, "[g]o [d]efinition")
-  map("gD", vim.lsp.buf.declaration, "[g]o [d]eclaration")
-  map("gr", require("telescope.builtin").lsp_references, "[g]o [r]eferences")
-  map("gI", require("telescope.builtin").lsp_implementations, "[g]o [i]mplementations")
-
-  map("<leader>lr", vim.lsp.buf.rename, "[r]ename")
-  map("<leader>lf", vim.lsp.buf.format, "[f]ormat buffer")
-  map("<leader>la", vim.lsp.buf.code_action, "code [a]ction")
-  map("<leader>lt", require("telescope.builtin").lsp_type_definitions, "[t]ype definitions")
-  map("<leader>ls", require("telescope.builtin").lsp_document_symbols, "document [s]ymbols")
-  -- vim.keymap.set("i", "<C-K>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: signature help", silent = true })
-
-  map("[d", vim.diagnostic.goto_prev, "go previous [d]iagnostic")
-  map("]d", vim.diagnostic.goto_next, "go next [d]iagnostic")
-  map("<leader>df", vim.diagnostic.open_float, "open [d]iagnostic [f]loat")
-  map("<leader>dq", vim.diagnostic.setloclist, "set [d]iagnostic [q]flist")
-
-  map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[w]orkspace [s]ymbols")
-  map("<leader>wa", vim.lsp.buf.add_workspace_folder, "[w]orkspace [a]dd folder")
-  map("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[w]orkspace [r]emove folder")
-  map("<leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, "[w]orkspace [l]ist folders")
-
-  if client.server_capabilities.documentSymbolProvider then
-    require("nvim-navic").attach(client, bufnr)
-  end
-end
-
 local function config_navic()
+  ---@diagnostic disable-next-line: missing-fields
   require("nvim-navic").setup({
     icons = require("config.icons"),
     highlight = true,
@@ -59,8 +21,7 @@ local function config()
   local lspconfig = require("lspconfig")
   for name, specific_settings in pairs(require("config.language-servers")) do
     local settings = {
-      on_attach = on_attach,
-      capabilities = capabilities
+      capabilities = capabilities,
     }
 
     settings = vim.tbl_deep_extend("force", specific_settings, settings)

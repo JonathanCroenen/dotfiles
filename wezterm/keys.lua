@@ -1,51 +1,12 @@
 local wezterm = require("wezterm")
-
-local config = {}
-if wezterm.config_builder then
-  config = wezterm.config_builder()
-end
-
-config.audible_bell = "Disabled"
-config.check_for_updates = false
-
--- [[ Appearance ]]
-config.font = wezterm.font("JetBrains Mono Nerd Font Mono")
-config.font_size = 11.5
-
-config.initial_cols = 135
-config.initial_rows = 32
-
-config.colors = require("lua/rose-pine").colors()
-config.window_frame = require("lua/rose-pine").window_frame()
-
-config.hide_tab_bar_if_only_one_tab = false
-config.use_fancy_tab_bar = false
-config.tab_max_width = 20
-
-config.inactive_pane_hsb = {
-  saturation = 1.0,
-  brightness = 1.0,
-}
-
-config.window_padding = {
-  left = 1,
-  right = 1,
-  top = 1,
-  bottom = 1,
-}
-
-wezterm.on("update-right-status", function(window, _)
-  window:set_right_status("session: " .. window:active_workspace())
-end)
-
--- [[ Keymappings ]]
 local action = wezterm.action
+local sessionizer = require("sessionizer")
 
--- config.leader = { key = "e", mods = "CTRL", timeout_milliseconds = 1000 }
-config.keys = {
+local M = {}
+M.keys = {
   -- [[ Pane Management ]]
   { key = "_",          mods = "CTRL|SHIFT", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-  { key = "|",         mods = "CTRL|SHIFT", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  { key = "|",          mods = "CTRL|SHIFT", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
   { key = "q",          mods = "CTRL|SHIFT", action = action.CloseCurrentPane({ confirm = true }) },
 
   { key = "z",          mods = "CTRL|SHIFT", action = action.TogglePaneZoomState },
@@ -78,41 +39,19 @@ config.keys = {
   { key = "0",          mods = "CTRL|SHIFT", action = action.ActivateTab(-1) },
 
   -- [[ Miscelaneous ]]
-  { key = "F11",        mods = "",           action = action.ToggleFullScreen },
-
-  -- [[ Sessions ]]
+  { key = "s",          mods = "CTRL|SHIFT", action = wezterm.action_callback(sessionizer.toggle) },
   {
     key = "s",
     mods = "ALT",
     action = action.ShowLauncherArgs({
-      title = "Session picker",
+      title = "Select Workspace",
       flags = "FUZZY|WORKSPACES",
     }),
   },
-  -- {
-  --   key = "s",
-  --   mods = "CTRL|SHIFT",
-  --   action = action.PromptInputLine {
-  --     description = wezterm.format {
-  --       { Attribute = { Intensity = "Bold" } },
-  --       { Foreground = { AnsiColor = "Fuchsia" } },
-  --       { Text = "Enter name for new workspace" },
-  --     },
-  --     action = wezterm.action_callback(function(window, pane, line)
-  --       -- line will be `nil` if they hit escape without entering anything
-  --       -- An empty string if they just hit enter
-  --       -- Or the actual line of text they wrote
-  --       if line then
-  --         window:perform_action(
-  --           action.SwitchToWorkspace {
-  --             name = line,
-  --           },
-  --           pane
-  --         )
-  --       end
-  --     end),
-  --   },
-  -- },
+  -- { key = "l",   mods = "CTRL|SHIFT", action = action.ShowLauncher },
+  { key = "r",   mods = "CTRL|SHIFT", action = action.ReloadConfiguration },
+  { key = "F10", mods = "",           action = action.ShowDebugOverlay },
+  { key = "F11", mods = "",           action = action.ToggleFullScreen },
 }
 
-return config
+return M

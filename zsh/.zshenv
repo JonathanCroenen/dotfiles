@@ -1,10 +1,48 @@
 # locale
 export LANG=en_US.UTF-8
 
-# xdg
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
+OS=$(uname)
+
+# paths
+if [[ $OS == "Linux" ]]; then
+  # xdg
+  export XDG_CONFIG_HOME="$HOME/.config"
+  export XDG_DATA_HOME="$HOME/.local/share"
+  export XDG_CACHE_HOME="$HOME/.cache"
+
+  export DOTFILES="$HOME/Dev/Dotfiles"
+
+  # path
+  export PATH="$HOME/.local/bin:$PATH"
+  export PATH="$HOME/Dev/Bin:$PATH"
+  export PATH="/usr/local/jdk1.8.0/bin:$PATH"
+  export PATH="/usr/local/cuda-12.3/bin:$PATH"
+  export PATH="$HOME/.ghcup/bin:$PATH"
+  export PATH="$HOME/.cargo/bin:$PATH"
+
+  # lib path
+  export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
+  export LD_LIBRARY_PATH="/usr/local/cuda-12.3/lib64/:$LD_LIBRARY_PATH"
+  export LD_LIBRARY_PATH="$HOME/Dev/Lib/:$LD_LIBRARY_PATH"
+
+elif [[ $OS == "Darwin" ]]; then
+  # xdg
+  export XDG_CONFIG_HOME="$HOME/Library/Preferences"
+  export XDG_DATA_HOME="$HOME/Library"
+  export XDG_CACHE_HOME="$HOME/Library/Caches"
+
+  export DOTFILES="$HOME/Dev/dotfiles"
+
+  # path
+  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="$HOME/.cargo/bin:$PATH"
+else
+  echo "Unsupported OS"
+  exit 1
+fi
+
+if [[ $OS == "Linux" ]]; then
+
 
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
@@ -15,7 +53,6 @@ export SAVEHIST=10000
 
 # vars
 export TERM="xterm-256color"
-export DOTFILES="$HOME/Dev/Dotfiles"
 
 # editor
 export EDITOR="nvim"
@@ -24,15 +61,20 @@ export VISUAL="nvim"
 # man pages
 export MANPAGER="nvim +Man!"
 
-# path
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/Dev/Bin:$PATH"
-export PATH="/usr/local/jdk1.8.0/bin:$PATH"
-export PATH="/usr/local/cuda-12.3/bin:$PATH"
-export PATH="$HOME/.ghcup/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+# git
+if [[ $OS == "Linux" ]]; then
+  export GIT_EDITOR="nvim"
+  export GIT_PAGER="nvim -R"
 
-# lib path
-export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="/usr/local/cuda-12.3/lib64/:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="$HOME/Dev/Lib/:$LD_LIBRARY_PATH"
+  export GIT_AUTHOR_EMAIL="jonathan.croenen@outlook.com"
+  export GIT_COMMITTER_EMAIL="jonathan.croenen@outlook.com"
+else
+  export GIT_EDITOR="code --wait"
+  export GIT_PAGER="code --wait"
+
+  export GIT_AUTHOR_EMAIL="jonathan.croenen@robojob.eu"
+  export GIT_COMMITTER_EMAIL="jonathan.croenen@robojob.eu"
+fi
+
+export GIT_AUTHOR_NAME="Jonathan Croenen"
+export GIT_COMMITTER_NAME="Jonathan Croenen"

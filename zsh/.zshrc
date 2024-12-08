@@ -17,8 +17,8 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
 
-# colors
 autoload -U colors; colors
+autoload -U +X compinit && compinit
 
 # custom
 source "$ZDOTDIR/aliases.zsh"
@@ -27,15 +27,17 @@ source "$ZDOTDIR/prompt.zsh-theme"
 
 # plugins
 source "$ZDOTDIR/plugins/per-directory-history.zsh"
-source "$ZDOTDIR/plugins/completion.zsh"
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$ZDOTDIR/plugins/autosuggestions.zsh"
 source "$ZDOTDIR/plugins/vim-mode.zsh"
 source "$ZDOTDIR/plugins/sudo.zsh"
 source "$ZDOTDIR/plugins/conda-integration.zsh"
 source "$ZDOTDIR/plugins/nvm-integration.zsh"
 source "$ZDOTDIR/plugins/opam-integration.zsh"
 source "$ZDOTDIR/plugins/fzf-integration.zsh"
+source "$ZDOTDIR/plugins/wezterm-integration.zsh"
+source "$ZDOTDIR/plugins/extra-completions.zsh"
+source "$ZDOTDIR/plugins/completion.zsh"
+source "$ZDOTDIR/plugins/autosuggestions.zsh"
 
 # history completion
 autoload -Uz up-line-or-beginning-search

@@ -2,11 +2,11 @@ local function config()
   local notify = require("notify")
   local icons = require("config.icons")
 
----@diagnostic disable-next-line: missing-fields
+  ---@diagnostic disable-next-line: missing-fields
   notify.setup({
     timeout = 3000,
-    max_width = 60,
-    render = "default",
+    max_width = 80,
+    render = "wrapped-default",
     stages = "fade",
     icons = {
       ERROR = icons.error,
