@@ -5,7 +5,7 @@ local function config()
   notify.setup({
     timeout = 3000,
     max_width = 60,
-    render = "default",
+    render = "wrapped-default",
     stages = "fade",
     icons = {
       ERROR = icons.error,
