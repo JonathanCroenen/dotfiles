@@ -19,6 +19,7 @@ if [[ $OS == "Linux" ]]; then
   export PATH="/usr/local/cuda-12.3/bin:$PATH"
   export PATH="$HOME/.ghcup/bin:$PATH"
   export PATH="$HOME/.cargo/bin:$PATH"
+  export PATH="$HOME/.go/bin:$PATH"
 
   # lib path
   export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
@@ -32,6 +33,8 @@ elif [[ $OS == "Darwin" ]]; then
   export XDG_CACHE_HOME="$HOME/Library/Caches"
 
   export DOTFILES="$HOME/Dev/dotfiles"
+  export GOPATH="$HOME/.go"
+  export PATH="$GOPATH/bin:$PATH"
 
   # path
   export PATH="/opt/homebrew/bin:$PATH"
