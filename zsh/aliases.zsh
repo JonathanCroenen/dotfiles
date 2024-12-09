@@ -14,9 +14,9 @@ alias imgcat='wezterm imgcat'
 # alias lsf='colorls --sd -f'
 
 # file operations
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias rm='rm -iv'
+alias cp='cp -I'
+alias mv='mv -I'
+alias rm='rm -I'
 
 # apt
 alias aptup='sudo apt update'
