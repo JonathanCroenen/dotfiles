@@ -14,8 +14,8 @@ alias imgcat='wezterm imgcat'
 # alias lsf='colorls --sd -f'
 
 # file operations
-alias cp='cp -I'
-alias mv='mv -I'
+alias cp='cp -i'
+alias mv='mv -i'
 alias rm='rm -I'
 
 # apt

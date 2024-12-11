@@ -13,13 +13,13 @@ local function config()
       formatting.clang_format,
       formatting.ocamlformat,
       diagnostics.todo_comments,
-    }
+    },
   })
 end
 
 return {
   "nvimtools/none-ls.nvim",
-  commit = "6be90f8",
+  -- commit = "6be90f8",
   name = "none-ls",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { "nvim-lua/plenary.nvim" },
