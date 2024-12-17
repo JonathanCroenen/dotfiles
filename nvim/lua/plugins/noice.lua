@@ -74,6 +74,7 @@ end
 return {
   enabled = false,
   "folke/noice.nvim",
+  version = "*",
   event = "VeryLazy",
   config = config,
 

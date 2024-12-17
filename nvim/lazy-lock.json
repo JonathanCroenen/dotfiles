@@ -20,7 +20,12 @@
   "mason-lspconfig.nvim": { "branch": "main", "commit": "8e46de9241d3997927af12196bd8faa0ed08c29a" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "neodev.nvim": { "branch": "main", "commit": "46aa467dca16cf3dfe27098042402066d2ae242d" },
+<<<<<<< Updated upstream
   "none-ls": { "branch": "main", "commit": "58866c670d68ef80397c317a3a1ee5f53ca646fd" },
+=======
+  "noice.nvim": { "branch": "main", "commit": "d426bc311c3e294569841ea06ba86feca483a7e4" },
+  "none-ls": { "branch": "main", "commit": "6be90f8cf37d7f50a89b7229412f6184b16f1b28" },
+>>>>>>> Stashed changes
   "nui.nvim": { "branch": "main", "commit": "b1b9b75a2d8041e1c2234f7448c61f8468a4258d" },
   "nvim-autopairs": { "branch": "master", "commit": "b464658e9b880f463b9f7e6ccddd93fb0013f559" },
   "nvim-cmp": { "branch": "main", "commit": "ca4d3330d386e76967e53b85953c170658255ecb" },
