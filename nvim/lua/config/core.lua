@@ -103,8 +103,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, "[d]ocument [s]ymbols")
     map("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[w]orkspace [s]ymbols")
 
-    map("n", "[d", vim.diagnostic.goto_prev, "go previous [d]iagnostic")
-    map("n", "]d", vim.diagnostic.goto_next, "go next [d]iagnostic")
+    map("n", "[d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "go previous [d]iagnostic")
+    map("n", "]d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "go next [d]iagnostic")
     map("n", "<leader>df", vim.diagnostic.open_float, "open [d]iagnostic [f]loat")
     map("n", "<leader>dq", vim.diagnostic.setloclist, "set [d]iagnostic quicklist")
 

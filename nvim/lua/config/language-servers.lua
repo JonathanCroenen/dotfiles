@@ -35,5 +35,5 @@ return {
       },
     },
   },
-  ocamllsp = {},
+  ocamllsp = {}
 }
