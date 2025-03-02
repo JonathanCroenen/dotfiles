@@ -20,6 +20,7 @@ if [[ $OS == "Linux" ]]; then
   export PATH="$HOME/.ghcup/bin:$PATH"
   export PATH="$HOME/.cargo/bin:$PATH"
   export PATH="$HOME/.go/bin:$PATH"
+  export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 
   # lib path
   export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
