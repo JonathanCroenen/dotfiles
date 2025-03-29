@@ -18,6 +18,10 @@ return {
       answer_header = " copilot ",
       error_header = " error ",
       separator = "───",
+      sticky = {
+        "$claude-3.5-sonnet",
+        "#files",
+      },
     },
   },
 }

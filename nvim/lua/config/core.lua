@@ -135,6 +135,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+-- Debugger Mappings
+local ok, dap = pcall(require, "dap")
+if ok then
+  map("n", "<leader>dc", dap.continue, "dap [c]ontinue")
+  map("n", "<leader>do", dap.step_over, "dap step [o]ver")
+  map("n", "<leader>di", dap.step_into, "dap step [i]nto")
+  map("n", "<leader>du", dap.step_out, "dap step out")
+  map("n", "<leader>db", dap.toggle_breakpoint, "toggle [b]reakpoint")
+  map("n", "<leader>dt", dap.terminate, "dap [t]erminate")
+  map("n", "<leader>dp", dap.pause, "dap [p]ause")
+  map("n", "<leader>dr", dap.restart, "dap [r]estart")
+  map("n", "<leader>dh", dap.run_to_cursor, "dap run to [h]ere")
+end
+
 -- [[ Nice Auto Commands ]]
 -- Highlight yanked text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
