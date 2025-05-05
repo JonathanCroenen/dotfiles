@@ -7,6 +7,9 @@ if [ $# -ne 1 ]; then
 fi
 XDG_CONFIG_HOME="$1"
 
+mkdir -p $XDG_CONFIG_HOME
+rm -rf $XDG_CONFIG_HOME/nvim $HOME/.zshenv $HOME/.zshrc $XDG_CONFIG_HOME/zsh $HOME/.wezterm.lua $HOME/.wezterm
+
 ln -s $DOTFILES/nvim $XDG_CONFIG_HOME/nvim
 
 ln -s $DOTFILES/zsh/.zshenv $HOME/.zshenv
