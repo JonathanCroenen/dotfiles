@@ -9,11 +9,12 @@ if [[ $OS == "Linux" ]]; then
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
   export XDG_CACHE_HOME="$HOME/.cache"
+  export XDG_BIN_HOME="$HOME/.local/bin"
 
   export DOTFILES="$HOME/Dev/Dotfiles"
 
   # path
-  export PATH="$HOME/.local/bin:$PATH"
+  export PATH="$XDG_BIN_HOME:$PATH"
   export PATH="$HOME/Dev/Bin:$PATH"
   export PATH="/usr/local/jdk1.8.0/bin:$PATH"
   export PATH="/usr/local/cuda-12.3/bin:$PATH"
@@ -31,12 +32,14 @@ elif [[ $OS == "Darwin" ]]; then
   export XDG_CONFIG_HOME="$HOME/Library/Preferences"
   export XDG_DATA_HOME="$HOME/Library"
   export XDG_CACHE_HOME="$HOME/Library/Caches"
+  export XDG_BIN_HOME="$HOME/.local/bin"
 
   export DOTFILES="$HOME/Dev/dotfiles"
   export GOPATH="$HOME/.go"
-  export PATH="$GOPATH/bin:$PATH"
 
   # path
+  export PATH="$GOPATH/bin:$PATH"
+  export PATH="$XDG_BIN_HOME:$PATH"
   export PATH="/opt/homebrew/bin:$PATH"
   export PATH="$HOME/.cargo/bin:$PATH"
 else
