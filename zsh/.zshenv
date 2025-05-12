@@ -67,19 +67,5 @@ export VISUAL="nvim"
 export MANPAGER="nvim +Man!"
 
 # git
-if [[ $OS == "Linux" ]]; then
-  export GIT_EDITOR="nano"
-  export GIT_PAGER="nvim -R"
-
-  export GIT_AUTHOR_EMAIL="jonathan.croenen@outlook.com"
-  export GIT_COMMITTER_EMAIL="jonathan.croenen@outlook.com"
-else
-  export GIT_EDITOR="nano"
-  export GIT_PAGER="nano"
-
-  export GIT_AUTHOR_EMAIL="jonathan.croenen@robojob.eu"
-  export GIT_COMMITTER_EMAIL="jonathan.croenen@robojob.eu"
-fi
-
 export GIT_AUTHOR_NAME="Jonathan Croenen"
 export GIT_COMMITTER_NAME="Jonathan Croenen"
