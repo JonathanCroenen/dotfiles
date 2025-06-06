@@ -65,6 +65,7 @@ function precmd {
     vcs_info
 
     PROMPT=" %(?:%F{green}•%f:%F{red}•%f) "
+    PROMPT+="%F{white}[%F{magenta}%m%F{white}] "  # Add hostname here
     PROMPT+="$(prompt_virtualenv_info)"
     PROMPT+="$(prompt_path_info)"
     PROMPT+="$(prompt_git_info)"

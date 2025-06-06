@@ -9,11 +9,12 @@ if [[ $OS == "Linux" ]]; then
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
   export XDG_CACHE_HOME="$HOME/.cache"
+  export XDG_BIN_HOME="$HOME/.local/bin"
 
   export DOTFILES="$HOME/Dev/Dotfiles"
 
   # path
-  export PATH="$HOME/.local/bin:$PATH"
+  export PATH="$XDG_BIN_HOME:$PATH"
   export PATH="$HOME/Dev/Bin:$PATH"
   export PATH="/usr/local/jdk1.8.0/bin:$PATH"
   export PATH="/usr/local/cuda-12.3/bin:$PATH"
@@ -33,12 +34,14 @@ elif [[ $OS == "Darwin" ]]; then
   export XDG_CONFIG_HOME="$HOME/Library/Preferences"
   export XDG_DATA_HOME="$HOME/Library"
   export XDG_CACHE_HOME="$HOME/Library/Caches"
+  export XDG_BIN_HOME="$HOME/.local/bin"
 
   export DOTFILES="$HOME/Dev/dotfiles"
   export GOPATH="$HOME/.go"
-  export PATH="$GOPATH/bin:$PATH"
 
   # path
+  export PATH="$GOPATH/bin:$PATH"
+  export PATH="$XDG_BIN_HOME:$PATH"
   export PATH="/opt/homebrew/bin:$PATH"
   export PATH="$HOME/.cargo/bin:$PATH"
 else
@@ -64,19 +67,5 @@ export VISUAL="nvim"
 export MANPAGER="nvim +Man!"
 
 # git
-if [[ $OS == "Linux" ]]; then
-  export GIT_EDITOR="nano"
-  export GIT_PAGER="nvim -R"
-
-  export GIT_AUTHOR_EMAIL="jonathan.croenen@outlook.com"
-  export GIT_COMMITTER_EMAIL="jonathan.croenen@outlook.com"
-else
-  export GIT_EDITOR="nano"
-  export GIT_PAGER="nano"
-
-  export GIT_AUTHOR_EMAIL="jonathan.croenen@robojob.eu"
-  export GIT_COMMITTER_EMAIL="jonathan.croenen@robojob.eu"
-fi
-
 export GIT_AUTHOR_NAME="Jonathan Croenen"
 export GIT_COMMITTER_NAME="Jonathan Croenen"

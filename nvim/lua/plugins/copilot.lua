@@ -5,7 +5,7 @@ local function config()
     },
     suggestion = {
       enabled = false,
-    }
+    },
   })
 
   require("copilot_cmp").setup()
@@ -13,7 +13,7 @@ end
 
 return {
   "zbirenbaum/copilot-cmp",
-  event = "InsertEnter",
+  event = "VeryLazy",
   dependencies = {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
