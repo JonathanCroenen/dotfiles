@@ -38,6 +38,7 @@ source "$ZDOTDIR/plugins/wezterm-integration.zsh"
 source "$ZDOTDIR/plugins/extra-completions.zsh"
 source "$ZDOTDIR/plugins/completion.zsh"
 source "$ZDOTDIR/plugins/autosuggestions.zsh"
+source "$ZDOTDIR/plugins/deno-integration.zsh"
 
 # history completion
 autoload -Uz up-line-or-beginning-search
