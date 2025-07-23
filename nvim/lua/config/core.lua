@@ -149,6 +149,12 @@ if ok then
   map("n", "<leader>dh", dap.run_to_cursor, "dap run to [h]ere")
 end
 
+local ok, dapui = pcall(require, "dapui")
+if ok then
+  map("n", "<M-k>", dapui.eval, "hover value under cursor")
+  map("n", "<leader>dui", dapui.toggle, "toggle dapui")
+end
+
 -- [[ Nice Auto Commands ]]
 -- Highlight yanked text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
