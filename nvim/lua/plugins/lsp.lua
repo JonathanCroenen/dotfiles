@@ -11,7 +11,9 @@ end
 local function config()
   require("neodev").setup()
   require("mason").setup()
-  require("mason-lspconfig").setup()
+  require("mason-lspconfig").setup({
+    automatic_enable = false,
+  })
   config_navic()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()

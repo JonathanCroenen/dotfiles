@@ -29,7 +29,12 @@ local function apply_keymaps()
   map("<leader>fd", builtin.diagnostics, "[f]ind [d]iagnostics")
   map("<leader>fr", builtin.resume, "[f]ind [r]esume previous")
 
-  map("<leader>fb", telescope.extensions.file_browser.file_browser, "[f]ile [b]rowser")
+  map("<leader>fB", telescope.extensions.file_browser.file_browser, "[f]ile [b]rowser")
+  map("<leader>fb", function()
+    telescope.extensions.file_browser.file_browser({
+      path = vim.fn.expand("%:p:h"),
+    })
+  end, "[f]ile [b]rowser")
 end
 
 local function apply_style()
@@ -88,8 +93,8 @@ local function config()
         mappings = {
           i = {
             ["<M-d>"] = actions.delete_buffer,
-          }
-        }
+          },
+        },
       },
       current_buffer_fuzzy_find = {
         previewer = false,
@@ -97,15 +102,14 @@ local function config()
           width = 0.5,
           height = 0.5,
         },
-      }
+      },
     },
     extensions = {
       file_browser = {
-        git_status = false,
+        git_status = true,
         hijack_netrw = true,
-        path = vim.fn.expand("%:p:h"),
-        cwd_to_path = true,
         hidden = { file_browser = true, folder_browser = true },
+        display_stat = { date = true, size = true },
         no_ignore = true,
       },
       ["ui-select"] = {
@@ -117,9 +121,18 @@ local function config()
     },
   })
 
-  pcall(telescope.load_extension, "fzf")
-  pcall(telescope.load_extension, "file_browser")
-  pcall(telescope.load_extension, "ui-select")
+  local ok, _ = pcall(telescope.load_extension, "fzf")
+  if not ok then
+    vim.notify("Telescope FZF extension not found. Please install it.", vim.log.levels.ERROR)
+  end
+  ok, _ = pcall(telescope.load_extension, "file_browser")
+  if not ok then
+    vim.notify("Telescope File Browser extension not found. Please install it.", vim.log.levels.ERROR)
+  end
+  ok, _ = pcall(telescope.load_extension, "ui-select")
+  if not ok then
+    vim.notify("Telescope UI Select extension not found. Please install it.", vim.log.levels.ERROR)
+  end
 
   apply_style()
   apply_keymaps()
@@ -131,7 +144,7 @@ return {
   config = config,
 
   dependencies = {
-    { "nvim-lua/plenary.nvim", event = "VimEnter" },
+    "nvim-lua/plenary.nvim",
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
