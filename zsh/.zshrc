@@ -58,6 +58,5 @@ bindkey -M viins "^L" autosuggest-accept
 # fix for insert -> type -> normal -> insert -> cant backspace anymore
 bindkey "^?" backward-delete-char
 
-export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
-
 ssh-add ~/.ssh/id_ed25519 >/dev/null 2>&1
+

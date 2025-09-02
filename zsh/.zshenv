@@ -44,6 +44,13 @@ elif [[ $OS == "Darwin" ]]; then
   export PATH="$XDG_BIN_HOME:$PATH"
   export PATH="/opt/homebrew/bin:$PATH"
   export PATH="$HOME/.cargo/bin:$PATH"
+
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+  export PATH="$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools"
+  export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+
+  export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
+  export STM32_PRG_PATH=/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin
 else
   echo "Unsupported OS"
   exit 1
