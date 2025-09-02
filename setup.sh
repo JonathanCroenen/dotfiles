@@ -11,7 +11,7 @@ OS=$(uname)
 if ! command -v zsh > /dev/null 2>&1
 then
   if [[ $OS == "Linux" ]]; then
-    apt install zsh
+    apt install zsh -y
   elif [[ $OS == "Darwin" ]]; then
     brew install zsh
   fi
