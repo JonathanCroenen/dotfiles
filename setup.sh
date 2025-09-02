@@ -1,12 +1,8 @@
 #!/bin/bash
 
-DOTFILES=$(pwd)
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <XDG_CONFIG_HOME>"
-    exit 1
-fi
-XDG_CONFIG_HOME="$1"
+git submodule update --init
 
+DOTFILES=$(pwd)
 mkdir -p $XDG_CONFIG_HOME
 rm -rf $XDG_CONFIG_HOME/nvim $HOME/.zshenv $HOME/.zshrc $XDG_CONFIG_HOME/zsh $HOME/.wezterm.lua $HOME/.wezterm
 
