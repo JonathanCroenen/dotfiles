@@ -7,8 +7,6 @@ if ! command -v zsh > /dev/null 2>&1
 then
   if [[ $OS == "Linux" ]]; then
     sudo apt install zsh -y
-  elif [[ $OS == "Darwin" ]]; then
-    brew install zsh
   fi
 fi
 
