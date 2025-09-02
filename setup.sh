@@ -12,6 +12,12 @@ then
   fi
 fi
 
+if [[ $OS == "Linux" ]]; then
+  XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+elif [[ $OS == "Darwin" ]]; then
+  XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/Library/Preferences"}
+fi
+
 DOTFILES=$(pwd)
 mkdir -p "$XDG_CONFIG_HOME"
 rm -rf $XDG_CONFIG_HOME/nvim $HOME/.zshenv $HOME/.zshrc $XDG_CONFIG_HOME/zsh $HOME/.wezterm.lua $HOME/.wezterm
