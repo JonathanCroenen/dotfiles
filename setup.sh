@@ -1,6 +1,21 @@
 #!/bin/bash
 
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
 git submodule update --init
+
+OS=$(uname)
+if ! command -v zsh > /dev/null 2>&1
+then
+  if [[ $OS == "Linux" ]]; then
+    apt install zsh
+  elif [[ $OS == "Darwin" ]]; then
+    brew install zsh
+  fi
+fi
 
 DOTFILES=$(pwd)
 mkdir -p $XDG_CONFIG_HOME
