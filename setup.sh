@@ -27,7 +27,7 @@ ln -s $DOTFILES/zsh/.zshrc $HOME/.zshrc
 ln -s $DOTFILES/zsh $XDG_CONFIG_HOME/zsh
 
 ln -s $DOTFILES/.wezterm.lua $HOME/.wezterm.lua
-ln -s $DOTFILES/.wezterm $HOME/.wezterm
+ln -s $DOTFILES/.wezterm $HOME/wezterm
 
 sudo chsh -s /bin/zsh $USER
 
