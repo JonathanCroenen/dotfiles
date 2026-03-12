@@ -61,3 +61,6 @@ bindkey "^?" backward-delete-char
 
 ssh-add ~/.ssh/id_ed25519 >/dev/null 2>&1
 
+
+# Added by Antigravity
+export PATH="/Users/jonathan/.antigravity/antigravity/bin:$PATH"

@@ -3,5 +3,6 @@ zsh/.zhistory
 zsh/.zsh_history
 zsh/.zcompdump
 zsh/.zsh_sessions/
+.zcompdump.*
 
 .DS_Store
