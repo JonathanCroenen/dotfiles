@@ -64,3 +64,7 @@ ssh-add ~/.ssh/id_ed25519 >/dev/null 2>&1
 
 # Added by Antigravity
 export PATH="/Users/jonathan/.antigravity/antigravity/bin:$PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/dev/.local/bin:$PATH"
