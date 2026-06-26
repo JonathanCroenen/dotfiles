@@ -29,5 +29,10 @@ ln -s $DOTFILES/zsh $XDG_CONFIG_HOME/zsh
 ln -s $DOTFILES/.wezterm.lua $HOME/.wezterm.lua
 ln -s $DOTFILES/.wezterm $HOME/.wezterm
 
+# Claude Code: link only the shareable files, leaving machine-local state in place
+mkdir -p $HOME/.claude
+ln -sf $DOTFILES/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
+ln -sf $DOTFILES/claude/settings.json $HOME/.claude/settings.json
+
 sudo chsh -s /bin/zsh $USER
 
