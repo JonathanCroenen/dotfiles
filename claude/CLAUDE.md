@@ -30,3 +30,9 @@ Example: `dynamically size prompt based on available width + fix char shift in s
 **Why:** These files often live inside devcontainer setups that pull in the dotfiles and get rebuilt/restarted frequently. Uncommitted (or unpushed) edits are easily lost on rebuild, so they must reach the remote immediately to be safe.
 
 **How to apply:** After editing any file under the dotfiles `claude/` directory at my request, stage, commit (following the short-lowercase-commits style), and push right away.
+
+## uv-over-system-python
+
+*In Python projects, always use `uv` instead of the system-installed Python.*
+
+Run Python and manage dependencies through `uv` — e.g. `uv run <script>`, `uv run python`, `uv add <pkg>`, `uv sync` — rather than calling system `python`/`pip` directly. Reach for `uv` even in projects not yet set up for it.
