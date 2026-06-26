@@ -25,8 +25,8 @@ Example: `dynamically size prompt based on available width + fix char shift in s
 
 ## auto-commit-this-config
 
-*When I ask you to change the synced Claude config (this CLAUDE.md or the dotfiles `claude/` files), make the change and commit it automatically — no need to ask.*
+*When I ask you to change the synced Claude config (this CLAUDE.md or the dotfiles `claude/` files), make the change and commit AND push it automatically — no need to ask.*
 
-**Why:** These files often live inside devcontainer setups that pull in the dotfiles and get rebuilt/restarted frequently. Uncommitted edits are easily lost on rebuild, so commit them immediately to be safe.
+**Why:** These files often live inside devcontainer setups that pull in the dotfiles and get rebuilt/restarted frequently. Uncommitted (or unpushed) edits are easily lost on rebuild, so they must reach the remote immediately to be safe.
 
-**How to apply:** After editing any file under the dotfiles `claude/` directory at my request, stage and commit it right away (following the short-lowercase-commits style). Push only if I ask.
+**How to apply:** After editing any file under the dotfiles `claude/` directory at my request, stage, commit (following the short-lowercase-commits style), and push right away.
