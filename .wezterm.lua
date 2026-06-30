@@ -40,6 +40,7 @@ config.window_padding = {
 }
 
 config.keys = require("keys").keys
+config.mouse_bindings = require("mouse").mouse_bindings
 
 wezterm.on("update-right-status", function(window, _)
   window:set_right_status("Workspace: " .. window:active_workspace())

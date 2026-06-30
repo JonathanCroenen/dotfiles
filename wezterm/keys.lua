@@ -54,4 +54,5 @@ M.keys = {
   { key = "F11", mods = "",           action = action.ToggleFullScreen },
 }
 
+
 return M

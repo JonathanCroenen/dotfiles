@@ -17,16 +17,18 @@ if [[ $OS == "Linux" ]]; then
   export PATH="$XDG_BIN_HOME:$PATH"
   export PATH="$HOME/Dev/Bin:$PATH"
   export PATH="/usr/local/jdk1.8.0/bin:$PATH"
-  export PATH="/usr/local/cuda-12.3/bin:$PATH"
+  export PATH="/usr/local/cuda/bin:$PATH"
   export PATH="$HOME/.ghcup/bin:$PATH"
   export PATH="$HOME/.cargo/bin:$PATH"
   export PATH="$HOME/.go/bin:$PATH"
   export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
   export PATH="/opt/renderdoc_1.37/bin:$PATH"
+  export PATH="/opt/blender-4.5.4-linux-x64/:$PATH"
+  export PATH="/opt/android-studio/bin/:$PATH"
 
   # lib path
   export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
-  export LD_LIBRARY_PATH="/usr/local/cuda-12.3/lib64/:$LD_LIBRARY_PATH"
+  export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
   export LD_LIBRARY_PATH="$HOME/Dev/Lib/:$LD_LIBRARY_PATH"
 
 elif [[ $OS == "Darwin" ]]; then

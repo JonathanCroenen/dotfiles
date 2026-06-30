@@ -20,14 +20,14 @@ local function config()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-  local lspconfig = require("lspconfig")
   for name, specific_settings in pairs(require("config.language-servers")) do
     local settings = {
       capabilities = capabilities,
     }
 
     settings = vim.tbl_deep_extend("force", specific_settings, settings)
-    lspconfig[name].setup(settings)
+    vim.lsp.config(name, settings)
+    vim.lsp.enable({ name })
   end
 end
 

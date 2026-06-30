@@ -1,8 +1,7 @@
 zsh/.zsh_dir_history/
 zsh/.zhistory
 zsh/.zsh_history
-zsh/.zcompdump
+zsh/.zcompdump*
 zsh/.zsh_sessions/
-.zcompdump.*
 
 .DS_Store
