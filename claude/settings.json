@@ -1,25 +1,4 @@
 {
-  "model": "opus",
-  "env": {
-    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-sonnet-5-5"
-  },
-  "modelSettings": {
-    "claude-sonnet-5-5": {
-      "effortLevel": "high"
-    }
-  },
-  "enabledPlugins": {
-    "chrome-devtools-mcp@chrome-devtools-plugins": true
-  },
-  "extraKnownMarketplaces": {
-    "chrome-devtools-plugins": {
-      "source": {
-        "source": "git",
-        "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp.git"
-      }
-    }
-  },
-  "tui": "fullscreen",
   "permissions": {
     "allow": [
       "Bash(git status:*)",
@@ -38,5 +17,51 @@
       "Bash(which:*)",
       "Bash(tree:*)"
     ]
-  }
+  },
+  "model": "opus[1m]",
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-sonnet-5-5"
+  },
+  "enabledPlugins": {
+    "chrome-devtools-mcp@chrome-devtools-plugins": true,
+    "i-have-adhd@i-have-adhd": true,
+    "cloudflare@cloudflare": true
+  },
+  "extraKnownMarketplaces": {
+    "chrome-devtools-plugins": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp.git"
+      }
+    },
+    "i-have-adhd": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/ayghri/i-have-adhd.git"
+      }
+    },
+    "cloudflare": {
+      "source": {
+        "source": "github",
+        "repo": "cloudflare/skills"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "xhigh"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true
 }
