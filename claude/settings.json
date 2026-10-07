@@ -1,5 +1,13 @@
 {
   "model": "opus",
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-sonnet-5-5"
+  },
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "enabledPlugins": {
     "chrome-devtools-mcp@chrome-devtools-plugins": true
   },
