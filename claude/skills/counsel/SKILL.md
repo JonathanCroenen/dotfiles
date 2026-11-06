@@ -1,6 +1,6 @@
 ---
 name: counsel
-description: Hill-climb a change to a score target. A builder subagent makes the change; a counsel (council) of at least two reviewer subagents, from different providers in T3 Code (Claude plus Gemini, GPT, …) and different Claude models elsewhere, grades it on categories the user names; this agent directs the loop, feeding reviews back to the builder and keeping the best version, until the target is met. Use when the user asks to build or improve something "with a counsel" or "council", wants a change graded on named categories ("grade on architecture, clean code and frontend design"), or sets a score target ("stop once every category has 8/10", "overall 9/10").
+description: Hill-climb a change to a score target. A builder subagent makes the change; a counsel (council) of at least two reviewer subagents, from different providers in T3 Code (Claude plus Gemini, GPT, …) and different Claude models elsewhere, grades it on categories the user names; this agent directs the loop, feeding reviews back to the builder and keeping the best version, until the target is met or a round limit the user can set (default 5) is reached. Use when the user asks to build or improve something "with a counsel" or "council", wants a change graded on named categories ("grade on architecture, clean code and frontend design"), or sets a score target ("stop once every category has 8/10", "overall 9/10"), optionally with a round limit ("at most 3 rounds").
 ---
 
 # Counsel
@@ -20,7 +20,7 @@ From `$ARGUMENTS` and the conversation, pin down:
 | **Target**: a threshold per category and/or overall. "Every category 8, frontend design 9" means min 8 each, 9 for that one. | Overall = mean of the category scores. |
 | **Counsel**: reviewers and their providers/models | 2 reviewers: in T3 Code one Claude and one non-Claude, elsewhere two Claude models (see §3). |
 | **Builder helpers**: may the builder spawn its own subagents? | No. |
-| **Round limit** | 5 rounds. |
+| **Round limit**: the most build-and-review rounds to run, from phrases like "at most 3 rounds", "max 4 iterations", "give it 6 tries". "No round limit" means none, but the plateau stop (§2) still applies. | 5 rounds. |
 | **Workspace** | A new branch `counsel/<slug>`, in a worktree if the current tree has uncommitted work; each round checkpointed as a commit there. |
 
 Restate the brief as a short block (change, rubric with thresholds, counsel, limits, workspace) and ask only about what is missing or ambiguous. A brief like "Build X with a counsel. Grade on architecture, clean code and frontend design. Stop once every category has 8/10 and frontend design 9/10" is complete: state the defaults you are applying and start.
@@ -41,11 +41,11 @@ Each round:
    - **Gap** = sum over every threshold of max(0, threshold − score). Gap 0 means the target is met.
    - Write the builder's feedback: per category below its threshold, the issues most likely to raise it, deduplicated and ordered by expected impact. Leave out praise and issues in categories already at target, unless they're cheap.
 6. **Hill climb.** If this round's gap is smaller than the best so far, it becomes the best. If it is larger, restore the best checkpoint (`git reset --hard <best>` on the counsel branch only), tell the builder its last attempt was reverted and why, and give it the best round's feedback plus what made this round worse.
-7. **Report the round** to the user in one or two lines: the scorecard against the target and what the builder will tackle next.
+7. **Report the round** to the user in one or two lines: "round N of M", the scorecard against the target and what the builder will tackle next.
 
 **Stop** when:
 - the gap is 0: done;
-- the round limit is reached;
+- the round limit is reached: finish with the best round, and offer to run more rounds if it was still improving;
 - the best gap hasn't improved for 2 rounds in a row (a plateau): more rounds of the same won't help;
 - reviewers keep asking for something that contradicts the user's request, or the builder can't meet one category without lowering another: that trade-off is the user's call. Ask.
 
