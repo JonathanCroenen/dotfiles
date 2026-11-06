@@ -10,17 +10,17 @@ AI writes code fast, so its mistakes pile up fast. Separate **design** from **re
 - 🐘 **Elephant**: this session. Holds the whole project in context, writes no code, only the design doc.
 - 🐟 **Goldfish**: fresh subagents with zero conversation context. They see only the doc and the repo, so they don't share the Elephant's assumptions and catch what it missed.
 
-Input: `$ARGUMENTS` is the change to design. If it names an existing design doc, skip to Phase 2.
+Input: the user's request (`$ARGUMENTS` or conversation) is the change to design. If it names an existing design doc, skip to Phase 2.
 
 ## Phase 1 🐘 Design (no code)
 
-1. **Load the project's memory.** Read CLAUDE.md/AGENTS.md, then whatever specs, architecture docs, ADRs or earlier design docs cover the area (`docs/`, `docs/designs/`, `specs/`, …), then the code the change touches. This is what makes the Elephant an elephant; don't skip it.
-2. **Interview the user.** Ask about the decisions that are genuinely theirs, one topic at a time, each with your recommendation and the trade-off (AskUserQuestion where it fits). Derive the topics from the codebase rather than a fixed list, typically: which entity/module owns it, which layer, data model and migration, compatibility with existing data or API consumers, UI wording, rollout. Argue back when a choice has a cost the user may not see. Settle facts yourself by reading code instead of asking.
+1. **Load the project's memory.** Read CLAUDE.md/AGENTS.md/GEMINI.md, then whatever specs, architecture docs, ADRs or earlier design docs cover the area (`docs/`, `docs/designs/`, `specs/`, …), then the code the change touches. This is what makes the Elephant an elephant; don't skip it.
+2. **Interview the user.** Ask about the decisions that are genuinely theirs, one topic at a time, each with your recommendation and the trade-off (using `AskUserQuestion` / `ask_question` where it fits). Derive the topics from the codebase rather than a fixed list, typically: which entity/module owns it, which layer, data model and migration, compatibility with existing data or API consumers, UI wording, rollout. Argue back when a choice has a cost the user may not see. Settle facts yourself by reading code instead of asking.
 3. **Write the design doc** from `design-doc-template.md` (next to this file). Put it where the project keeps designs; if there is no such place, `docs/designs/<yyyy-mm-dd>-<slug>.md`. Keep it short: a reviewer must be able to read it in one go. Write only this file in this phase: no code, no scaffolding, no "quick spike" edits.
 
 ## Phase 2 🐟 Review (fresh subagents, doc + repo only)
 
-Spawn the Goldfish **in parallel, in one message**, with the Agent tool, using a **non-fork** read-only agent type (e.g. `Plan`; never `fork`, which inherits this conversation). Prompts come from `goldfish-prompts.md`. Give each one the doc path, the repo root and its role, nothing else: no summary of the interview, no hint at what you think is weak. Anything you add becomes a shared assumption, which defeats the point.
+Spawn the Goldfish **in parallel, in one message**, using fresh zero-context read-only subagents (in Claude Code: `Agent` with a non-`fork` read-only type such as `Plan`, never `fork`; in Antigravity / Gemini: `invoke_subagent` with `TypeName: "research"`; in T3 Code across providers: `delegate_task` with `role: "review"`). Prompts come from `goldfish-prompts.md`. Give each one the doc path, the repo root and its role, nothing else: no summary of the interview, no hint at what you think is weak. Anything you add becomes a shared assumption, which defeats the point.
 
 The panel, 4–5 agents:
 
@@ -35,7 +35,7 @@ Then, as the Elephant:
 1. Compare the Comprehension paraphrase with the intent. Every mismatch is a doc fix.
 2. Merge the findings, drop duplicates, and verify each against the code before acting on it: a Goldfish can be wrong too. Note which you reject and why.
 3. Show the user a short verdict: blockers, majors, the readiness answer, and what you propose to change in the doc. The user decides: fix the doc, accept a risk (record it in the doc), or stop.
-4. After doc fixes, re-review with **new** Goldfish (new Agent calls, never SendMessage to the old ones: they are no longer goldfish). Re-run at least Comprehension and Readiness; re-run an Antagonist if its area changed.
+4. After doc fixes, re-review with **new** Goldfish (new subagent / `delegate_task` calls, never `SendMessage` / `send_message` / `t3_thread_send` to the old ones: they are no longer goldfish). Re-run at least Comprehension and Readiness; re-run an Antagonist if its area changed.
 
 **The gate:** Readiness says GO and no Blocker is open. Don't write code before it.
 
@@ -47,10 +47,10 @@ Then, as the Elephant:
 
 ## Phase 4 🔁 Close the loop
 
-1. Run the project's own checks (build, tests, lint, type check, plus anything CLAUDE.md asks for before a PR).
-2. Review the diff with a Goldfish that never saw the design: the project's review command (e.g. `/code-review`) or a fresh agent given only the diff. It reviews the code on its own terms.
-3. Optionally, one more fresh agent given the doc and the diff checks they match: every planned file changed, nothing unplanned.
-4. **Feed the lesson back.** When diff review catches something the design review missed, add the rule to the place the next Elephant will read (CLAUDE.md, a spec or architecture doc), so the next design avoids it. Propose the edit to the user.
+1. Run the project's own checks (build, tests, lint, type check, plus anything CLAUDE.md/AGENTS.md/GEMINI.md asks for before a PR).
+2. Review the diff with a Goldfish that never saw the design: the project's review command (e.g. `/code-review`) or a fresh subagent given only the diff. It reviews the code on its own terms.
+3. Optionally, one more fresh subagent given the doc and the diff checks they match: every planned file changed, nothing unplanned.
+4. **Feed the lesson back.** When diff review catches something the design review missed, add the rule to the place the next Elephant will read (CLAUDE.md/AGENTS.md/GEMINI.md, a spec or architecture doc), so the next design avoids it. Propose the edit to the user.
 5. Keep the final doc in the repo with the change if the project keeps designs; otherwise ask the user whether to commit it or drop it.
 
 ## Rule of thumb

@@ -1,6 +1,6 @@
 ---
 name: council
-description: Hill-climb a change to a score target. A builder subagent makes the change; a council of at least two reviewer subagents, from different providers in T3 Code (Claude plus Gemini, GPT, …) and different Claude models elsewhere, grades it on categories the user names; this agent directs the loop, feeding reviews back to the builder and keeping the best version, until the target is met or a round limit the user can set (default 5) is reached. Use when the user asks to build or improve something "with a council" (or "counsel"), wants a change graded on named categories ("grade on architecture, clean code and frontend design"), or sets a score target ("stop once every category has 8/10", "overall 9/10"), optionally with a round limit ("at most 3 rounds").
+description: Hill-climb a change to a score target. A builder subagent makes the change; a council of at least two reviewer subagents, from different providers in T3 Code (Claude plus Gemini, GPT, …) and different models elsewhere, grades it on categories the user names; this agent directs the loop, feeding reviews back to the builder and keeping the best version, until the target is met or a round limit the user can set (default 5) is reached. Use when the user asks to build or improve something "with a council" (or "counsel"), wants a change graded on named categories ("grade on architecture, clean code and frontend design"), or sets a score target ("stop once every category has 8/10", "overall 9/10"), optionally with a round limit ("at most 3 rounds").
 ---
 
 # Council
@@ -11,27 +11,27 @@ Prompts for the builder and reviewers are in `prompts.md` next to this file.
 
 ## 1. Parse the brief
 
-From `$ARGUMENTS` and the conversation, pin down:
+From the user's request (`$ARGUMENTS` or conversation), pin down:
 
 | Item | Default when the user doesn't say |
 |---|---|
 | **Change**: what to build or improve | Ask; never guess. |
 | **Categories**: what is graded, each with a one-line meaning | Ask. Offer correctness, architecture, code quality as a starting point. |
 | **Target**: a threshold per category and/or overall. "Every category 8, frontend design 9" means min 8 each, 9 for that one. | Overall = mean of the category scores. |
-| **Council**: reviewers and their providers/models | 2 reviewers: in T3 Code one Claude and one non-Claude, elsewhere two Claude models (see §3). |
+| **Council**: reviewers and their providers/models | 2 reviewers: in T3 Code one Claude and one non-Claude, elsewhere two subagents on your harness's models (see §3). |
 | **Builder helpers**: may the builder spawn its own subagents? | No. |
 | **Round limit**: the most build-and-review rounds to run, from phrases like "at most 3 rounds", "max 4 iterations", "give it 6 tries". "No round limit" means none, but the plateau stop (§2) still applies. | 5 rounds. |
 | **Workspace** | A new branch `council/<slug>`, in a worktree if the current tree has uncommitted work; each round checkpointed as a commit there. |
 
 Restate the brief as a short block (change, rubric with thresholds, council, limits, workspace) and ask only about what is missing or ambiguous. A brief like "Build X with a council. Grade on architecture, clean code and frontend design. Stop once every category has 8/10 and frontend design 9/10" is complete: state the defaults you are applying and start.
 
-Before the first round, read enough of the project (CLAUDE.md, the code the change touches, how to build and test it) to brief the builder well and to judge reviews.
+Before the first round, read enough of the project (CLAUDE.md/AGENTS.md/GEMINI.md, the code the change touches, how to build and test it) to brief the builder well and to judge reviews.
 
 ## 2. The loop
 
 Each round:
 
-1. **Build.** Round 1: give the builder the build prompt. Later rounds: give it the consolidated feedback (step 5). Continue the same builder when your tooling allows (e.g. SendMessage to the Agent), so it keeps its own context; otherwise start a fresh one with the brief, the current state and the feedback.
+1. **Build.** Round 1: give the builder the build prompt. Later rounds: give it the consolidated feedback (step 5). Continue the same builder when your tooling allows (e.g. `SendMessage` / `send_message` to the builder subagent), so it keeps its own context; otherwise start a fresh one with the brief, the current state and the feedback.
 2. **Gate on the objective checks.** Run the project's build, tests, lint and type check yourself. If they fail, send the failures back to the builder and don't review; a round that doesn't build isn't worth a reviewer's time.
 3. **Checkpoint.** Commit the round on the council branch (`council: round N`), so any round can be restored.
 4. **Review.** Start every reviewer in parallel, **fresh each round** (new agents, never a continued conversation), with the review prompt. Give them the original request, the rubric and how to see the change (base commit and branch). **Don't** give them the target, the round number, earlier scores or who the builder is: they grade the work against the rubric's anchors, not against a goal or a trend.
@@ -55,12 +55,14 @@ At least two reviewers. Provider diversity is the point, because a model shares 
 
 Cross-provider reviewers are expected **only in T3 Code**, whose tools handle the calls to other providers:
 
-- **In T3 Code** (the `t3-code` MCP tools are present): call `orchestrator_capabilities` once, then `delegate_task` once per reviewer with `role: "review"` and the provider and model in `target`. Start every reviewer before collecting any result. Claude reviewers can use the same tool or the Agent tool.
-- **Anywhere else**: the council is Claude only. Use Agent subagents (never `fork`) on different models (`opus`, `sonnet`, `fable`), and tell the user up front that the council is single-provider and so less independent. Don't reach for other agent CLIs or APIs to get around this.
+- **In T3 Code** (the `t3-code` MCP tools are present): call `orchestrator_capabilities` once, then `delegate_task` once per reviewer with `role: "review"` and the provider and model in `target`. Start every reviewer before collecting any result. Native subagents can be used for reviewers on your own provider when no extra settings are needed.
+- **In Claude Code (`claude`)**: the council is Claude only. Use `Agent` subagents (never `fork`) on different models (`opus`, `sonnet`, `haiku`), and tell the user up front that the council is single-provider and so less independent.
+- **In Antigravity / Gemini (`agy`)**: the council is Gemini only. Use `invoke_subagent` (`TypeName: "research"` or `"self"`, with `pro` / `flash` or `inherit`), and tell the user up front that the council is single-provider and so less independent.
+- **Anywhere else**: use your harness's native subagents and tell the user up front that the council is single-provider. Don't reach for other agent CLIs or APIs in the shell to get around this.
 
 If a provider or model the user named isn't available, say so and ask before substituting. Don't silently swap it.
 
-Reviewers are read-only: they read the diff and the code, and they may run the tests or the app, but they don't edit. The builder is a normal writing agent: Agent `general-purpose`, or in T3 Code `delegate_task` with `role: "implementation"` if the user wants another provider to build.
+Reviewers are read-only: they read the diff and the code, and they may run the tests or the app, but they don't edit. The builder is a normal writing agent: `Agent` (`general-purpose`) in Claude Code, `invoke_subagent` (`TypeName: "self"`) in Antigravity, or in T3 Code `delegate_task` with `role: "implementation"` if the user wants another provider to build.
 
 ## 4. Finish
 

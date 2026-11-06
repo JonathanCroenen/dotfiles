@@ -29,14 +29,38 @@ ln -s $DOTFILES/zsh $XDG_CONFIG_HOME/zsh
 ln -s $DOTFILES/.wezterm.lua $HOME/.wezterm.lua
 ln -s $DOTFILES/wezterm $HOME/.wezterm
 
-# Claude Code: link only the shareable files, leaving machine-local state in place
-mkdir -p $HOME/.claude
-ln -sf $DOTFILES/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
-ln -sf $DOTFILES/claude/settings.json $HOME/.claude/settings.json
-mkdir -p $HOME/.claude/skills
-for skill in $DOTFILES/claude/skills/*/; do
-  ln -sfn "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"
+# Agent configs & skills (Claude Code, Antigravity / agy, Gemini, Codex, T3 Code)
+# Link only the shareable files/skills, leaving machine-local state in place
+mkdir -p \
+  "$HOME/.claude/skills" \
+  "$HOME/.agents/skills" \
+  "$HOME/.gemini/skills" \
+  "$HOME/.gemini/config/skills" \
+  "$HOME/.gemini/antigravity-cli/skills" \
+  "$HOME/.codex/skills"
+
+ln -sf "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+ln -sf "$DOTFILES/claude/CLAUDE.md" "$HOME/.gemini/GEMINI.md"
+ln -sf "$DOTFILES/claude/CLAUDE.md" "$HOME/.gemini/config/GEMINI.md"
+ln -sf "$DOTFILES/claude/CLAUDE.md" "$HOME/.agents/AGENTS.md"
+ln -sf "$DOTFILES/claude/CLAUDE.md" "$HOME/.codex/AGENTS.md"
+ln -sf "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
+
+for skill in "$DOTFILES"/claude/skills/*/; do
+  name=$(basename "$skill")
+  target="${skill%/}"
+  ln -sfn "$target" "$HOME/.claude/skills/$name"
+  ln -sfn "$target" "$HOME/.agents/skills/$name"
+  ln -sfn "$target" "$HOME/.gemini/skills/$name"
+  ln -sfn "$target" "$HOME/.gemini/config/skills/$name"
+  ln -sfn "$target" "$HOME/.gemini/antigravity-cli/skills/$name"
+  ln -sfn "$target" "$HOME/.codex/skills/$name"
+  for provider_dir in "$HOME"/.t3/userdata/providers/antigravity/*/; do
+    [ -d "$provider_dir" ] || continue
+    mkdir -p "${provider_dir}config/skills" "${provider_dir}antigravity-cli/skills"
+    ln -sfn "$target" "${provider_dir}config/skills/$name"
+    ln -sfn "$target" "${provider_dir}antigravity-cli/skills/$name"
+  done
 done
 
 sudo chsh -s /bin/zsh $USER
-
