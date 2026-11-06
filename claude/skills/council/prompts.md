@@ -1,4 +1,4 @@
-# Counsel prompts
+# Council prompts
 
 Fill in the `<placeholders>`. Send the reviewer prompt identically to every reviewer.
 
