@@ -33,6 +33,10 @@ ln -s $DOTFILES/wezterm $HOME/.wezterm
 mkdir -p $HOME/.claude
 ln -sf $DOTFILES/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
 ln -sf $DOTFILES/claude/settings.json $HOME/.claude/settings.json
+mkdir -p $HOME/.claude/skills
+for skill in $DOTFILES/claude/skills/*/; do
+  ln -sfn "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"
+done
 
 sudo chsh -s /bin/zsh $USER
 
