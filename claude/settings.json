@@ -64,5 +64,30 @@
     }
   },
   "tui": "fullscreen",
-  "skipWorkflowUsageWarning": true
+  "skipWorkflowUsageWarning": true,
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$HOME/.claude/skills/i-have-adhd/hooks/adhd-mode.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$HOME/.claude/skills/i-have-adhd/hooks/adhd-mode.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
 }
