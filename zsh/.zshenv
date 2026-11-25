@@ -73,6 +73,10 @@ export VISUAL="nvim"
 # man pages
 export MANPAGER="nvim +Man!"
 
+# t3 code telemetry opt-out
+export T3CODE_TELEMETRY_ENABLED=false
+export T3CODE_OTEL_SDK_DISABLED=true
+
 # git
 export GIT_AUTHOR_NAME="Jonathan Croenen"
 export GIT_COMMITTER_NAME="Jonathan Croenen"
